@@ -1,6 +1,6 @@
 rootProject.name = "payment"
 
-include("payment-entity")
+include("payment-rds-entity")
 include("payment-api")
 include("payment-support")
 include("payment-front:payment-front-api")
@@ -26,7 +26,7 @@ pluginManagement {
                 "io.spring.dependency-management" -> useVersion(springDependencyManagementVersion)
                 "com.google.cloud.tools.jib" -> useVersion(jibVersion)
                 "org.sonarqube" -> useVersion(sonarqubeVersion)
-                "org.jlleitschuh.gradle.ktlint" -> useVersion(ktlintVersion)
+//                "org.jlleitschuh.gradle.ktlint" -> useVersion(ktlintVersion)
                 "org.jetbrains.kotlinx.kover" -> useVersion(koverVersion)
             }
         }

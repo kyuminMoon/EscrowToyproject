@@ -8,7 +8,6 @@ import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
-import jakarta.persistence.SequenceGenerator
 import jakarta.persistence.Table
 import product.ProductEntity
 import java.math.BigDecimal
@@ -18,8 +17,7 @@ import java.time.LocalDateTime
 @Table(name = "order_items")
 data class OrderItemEntity(
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "order_item_seq")
-    @SequenceGenerator(name = "order_item_seq", sequenceName = "order_item_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     val orderItemId: Long,
 

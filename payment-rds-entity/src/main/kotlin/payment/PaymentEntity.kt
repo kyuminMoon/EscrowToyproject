@@ -1,3 +1,5 @@
+package payment
+
 import jakarta.persistence.*
 import order.OrderEntity
 import user.UserEntity

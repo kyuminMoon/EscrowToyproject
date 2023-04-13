@@ -1,6 +1,6 @@
 package order
 
-import PaymentEntity
+import payment.PaymentEntity
 import jakarta.persistence.*
 import user.UserEntity
 import java.math.BigDecimal

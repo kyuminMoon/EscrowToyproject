@@ -1,6 +1,6 @@
 package user
 
-import PaymentEntity
+import payment.PaymentEntity
 import jakarta.persistence.*
 import order.OrderEntity
 import java.time.LocalDateTime
