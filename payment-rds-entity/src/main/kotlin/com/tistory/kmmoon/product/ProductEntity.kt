@@ -1,7 +1,7 @@
-package product
+package com.tistory.kmmoon.product
 
 import jakarta.persistence.*
-import order.OrderItemEntity
+import com.tistory.kmmoon.order.OrderItemEntity
 import java.math.BigDecimal
 import java.time.LocalDateTime
 

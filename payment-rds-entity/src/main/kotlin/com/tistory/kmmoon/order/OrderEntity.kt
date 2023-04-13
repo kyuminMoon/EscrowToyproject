@@ -1,8 +1,8 @@
-package order
+package com.tistory.kmmoon.order
 
-import payment.PaymentEntity
+import com.tistory.kmmoon.payment.PaymentEntity
 import jakarta.persistence.*
-import user.UserEntity
+import com.tistory.kmmoon.user.UserEntity
 import java.math.BigDecimal
 import java.time.LocalDateTime
 
