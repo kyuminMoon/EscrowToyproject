@@ -22,7 +22,7 @@ ext {
 apply<JibConfigPlugin>()
 
 dependencies {
-    implementation(project(":payment-rds-entity"))
+    implementation(project(":customer-rds-entity"))
     implementation(project(":common"))
 
     implementation(Dependencies.API)
