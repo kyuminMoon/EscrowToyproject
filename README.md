@@ -13,7 +13,7 @@
     - SpringBoot + Kotlin
   - payment-front-ui
     - Vue3 + TypeScript + Vite
-- payment-api
+- payment-user-api
   - SpringBoot + Kotlin
 - payment-entity
   - SpringBoot + Kotlin

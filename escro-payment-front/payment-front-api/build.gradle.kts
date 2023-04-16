@@ -27,7 +27,6 @@ ext {
 }
 
 dependencies {
-    implementation(project(":payment-support"))
     implementation(Dependencies.API)
     implementation(Dependencies.FEIGN)
 }

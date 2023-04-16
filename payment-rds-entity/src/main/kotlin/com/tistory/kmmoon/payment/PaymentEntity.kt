@@ -1,8 +1,6 @@
 package com.tistory.kmmoon.payment
 
 import jakarta.persistence.*
-import com.tistory.kmmoon.order.OrderEntity
-import com.tistory.kmmoon.user.UserEntity
 import java.math.BigDecimal
 import java.time.LocalDateTime
 
@@ -13,15 +11,6 @@ data class PaymentEntity(
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false)
   val paymentId: Long,
-
-  @OneToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "order_id")
-  val order: OrderEntity,
-
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "user_id")
-  val user: UserEntity,
-
   val amount: BigDecimal,
   val paymentMethod: String,
   val paymentStatus: String,

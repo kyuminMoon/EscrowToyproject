@@ -1,8 +1,6 @@
 package com.tistory.kmmoon.order
 
-import com.tistory.kmmoon.payment.PaymentEntity
 import jakarta.persistence.*
-import com.tistory.kmmoon.user.UserEntity
 import java.math.BigDecimal
 import java.time.LocalDateTime
 
@@ -14,10 +12,7 @@ data class OrderEntity(
     @Column(name = "id", nullable = false)
     val orderId: Long,
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id_fk")
-    val user: UserEntity,
-
+    val userId: Long,
     val status: String,
     val totalAmount: BigDecimal,
     val createdAt: LocalDateTime,
@@ -25,7 +20,5 @@ data class OrderEntity(
 
     @OneToMany(mappedBy = "order")
     val orderItems: MutableList<OrderItemEntity> = mutableListOf(),
-
-    @OneToOne(mappedBy = "order")
-    val payment: PaymentEntity?
+    val paymentId: Long?
 )

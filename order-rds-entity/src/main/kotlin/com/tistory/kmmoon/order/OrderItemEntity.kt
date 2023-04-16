@@ -9,7 +9,6 @@ import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
 import jakarta.persistence.Table
-import com.tistory.kmmoon.product.ProductEntity
 import java.math.BigDecimal
 import java.time.LocalDateTime
 
@@ -24,11 +23,6 @@ data class OrderItemEntity(
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     val order: OrderEntity,
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id")
-    val product: ProductEntity,
-
     val quantity: Int,
     val price: BigDecimal,
     val createdAt: LocalDateTime,

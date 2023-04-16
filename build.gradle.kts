@@ -10,9 +10,7 @@ bootJar.enabled = false
 plugins {
     id("org.springframework.boot")
     id("io.spring.dependency-management")
-    id("org.sonarqube")
     id("com.google.cloud.tools.jib")
-//    id("org.jlleitschuh.gradle.ktlint")
     id("org.jetbrains.kotlinx.kover")
     kotlin("plugin.spring")
     kotlin("plugin.jpa")
@@ -26,12 +24,10 @@ allprojects {
         plugin("kotlin-spring")
         plugin("kotlin-jpa")
         plugin("kotlin-kapt")
-//        plugin("org.jlleitschuh.gradle.ktlint")
         plugin("idea")
         plugin("com.google.cloud.tools.jib")
         plugin("org.springframework.boot")
         plugin("io.spring.dependency-management")
-        plugin("org.sonarqube")
         plugin("kover")
     }
 
@@ -77,10 +73,6 @@ allprojects {
                 }
             }
         }
-    }
-
-    sonarqube.properties {
-        property("sonar.coverage.jacoco.xmlReportPaths", "$buildDir/reports/kover/merged/xml/report.xml")
     }
 
     tasks.withType<KotlinCompile> {

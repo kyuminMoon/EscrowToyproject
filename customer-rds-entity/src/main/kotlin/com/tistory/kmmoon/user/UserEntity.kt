@@ -1,8 +1,6 @@
 package com.tistory.kmmoon.user
 
-import com.tistory.kmmoon.payment.PaymentEntity
 import jakarta.persistence.*
-import com.tistory.kmmoon.order.OrderEntity
 import java.time.LocalDateTime
 
 @Entity
@@ -20,10 +18,4 @@ data class UserEntity(
   val phone: String,
   val createdAt: LocalDateTime,
   val updatedAt: LocalDateTime,
-
-  @OneToMany(mappedBy = "user")
-  val orders: MutableList<OrderEntity> = mutableListOf(),
-
-  @OneToMany(mappedBy = "user")
-  val payments: MutableList<PaymentEntity> = mutableListOf()
 )

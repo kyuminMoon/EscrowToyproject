@@ -1,7 +1,6 @@
 package com.tistory.kmmoon.product
 
 import jakarta.persistence.*
-import com.tistory.kmmoon.order.OrderItemEntity
 import java.math.BigDecimal
 import java.time.LocalDateTime
 
@@ -19,7 +18,4 @@ data class ProductEntity(
   val stock: Int,
   val createdAt: LocalDateTime,
   val updatedAt: LocalDateTime,
-
-  @OneToMany(mappedBy = "product")
-  val orderItems: MutableList<OrderItemEntity> = mutableListOf()
 )
