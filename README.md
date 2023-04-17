@@ -8,17 +8,23 @@
 
 > 모듈 구성
 
-- payment-front
+- escro-payment-front
   - payment-front-api
     - SpringBoot + Kotlin
   - payment-front-ui
     - Vue3 + TypeScript + Vite
-- payment-user-api
+- customer-api
+- order-api
+- payment-api
+- product-api
   - SpringBoot + Kotlin
-- payment-entity
+- customer-rds-entity
+- order-rds-entity
+- payment-rds-entity
+- product-rds-entity
   - SpringBoot + Kotlin
   - MySQL
-- payment-support
+- common
   - SpringBoot + Kotlin
 - buildSrc
   - Project Library and Version Management
