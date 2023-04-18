@@ -1,7 +1,7 @@
-package com.tistory.kmmoon.web.inbound
+package com.tistory.kmmoon.adaptor.`in`
 
 import com.tistory.kmmoon.order.OrderEntity
-import com.tistory.kmmoon.service.OrderService
+import com.tistory.kmmoon.application.OrderService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping

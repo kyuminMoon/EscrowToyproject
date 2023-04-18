@@ -1,7 +1,7 @@
-package com.tistory.kmmoon.service
+package com.tistory.kmmoon.application
 
 import com.tistory.kmmoon.order.OrderEntity
-import com.tistory.kmmoon.order.OrderRepository
+import com.tistory.kmmoon.order.infrastructure.OrderRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
