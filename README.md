@@ -13,19 +13,27 @@
     - SpringBoot + Kotlin
   - payment-front-ui
     - Vue3 + TypeScript + Vite
+
+
 - customer-api
 - order-api
 - payment-api
 - product-api
   - SpringBoot + Kotlin
+
+
 - customer-rds-entity
 - order-rds-entity
 - payment-rds-entity
 - product-rds-entity
   - SpringBoot + Kotlin
   - MySQL
+
+
 - common
   - SpringBoot + Kotlin
+
+
 - buildSrc
   - Project Library and Version Management
 
