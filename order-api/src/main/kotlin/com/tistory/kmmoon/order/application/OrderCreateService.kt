@@ -1,6 +1,6 @@
-package com.tistory.kmmoon.application
+package com.tistory.kmmoon.order.application
 
-import com.tistory.kmmoon.application.port.`in`.OrderCreateUseCase
+import com.tistory.kmmoon.order.application.port.`in`.OrderCreateUseCase
 import com.tistory.kmmoon.order.OrderEntity
 import com.tistory.kmmoon.order.infrastructure.OrderRepository
 import org.springframework.beans.factory.annotation.Autowired
