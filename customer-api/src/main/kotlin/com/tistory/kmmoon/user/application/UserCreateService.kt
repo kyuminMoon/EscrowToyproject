@@ -1,12 +1,12 @@
-package com.tistory.kmmoon.service
+package com.tistory.kmmoon.user.application
 
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.stereotype.Component
 import com.tistory.kmmoon.user.UserEntity
 import com.tistory.kmmoon.user.UserRepository
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Component
 
 @Component
-class UserService {
+class UserCreateService {
 
   @Autowired
   lateinit var userRepository: UserRepository;
