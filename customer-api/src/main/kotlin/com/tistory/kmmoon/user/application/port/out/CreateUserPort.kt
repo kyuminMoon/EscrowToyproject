@@ -1,3 +1,7 @@
-package com.tistory.kmmoon.user.application.port.out;
+package com.tistory.kmmoon.user.application.port.out
 
-public interface CreateUserPort {}
+import com.tistory.kmmoon.user.UserEntity
+
+interface CreateUserPort {
+  fun create(userEntity: UserEntity): UserEntity
+}

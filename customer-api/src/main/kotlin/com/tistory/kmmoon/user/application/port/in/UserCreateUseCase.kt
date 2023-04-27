@@ -1,3 +1,8 @@
-package com.tistory.kmmoon.user.application.port.in;
+package com.tistory.kmmoon.user.application.port.`in`
 
-public interface UserCreateUseCase {}
+import com.tistory.kmmoon.user.domain.User
+import com.tistory.kmmoon.user.domain.request.UserCreateRequest
+
+interface UserCreateUseCase {
+  fun create(request: UserCreateRequest): User
+}

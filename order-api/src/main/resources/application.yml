@@ -4,3 +4,16 @@ server:
 spring:
   profiles:
     include: db
+
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: localhost:9092,localhost:9093,localhost:9094
+      bindings:
+        orderCreated:
+          destination: order-created
+          group: order-service
+        paymentCompleted:
+          destination: payment-completed
+          group: order-service

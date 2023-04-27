@@ -1,3 +1,3 @@
-package com.tistory.kmmoon.user.application.port.in;
+package com.tistory.kmmoon.user.application.port.`in`
 
-public interface UserDeleteUseCase {}
+interface UserDeleteUseCase 

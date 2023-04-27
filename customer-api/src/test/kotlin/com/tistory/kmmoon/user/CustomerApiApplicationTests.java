@@ -1,10 +1,10 @@
-package com.tistory.kmmoon;
+package com.tistory.kmmoon.user;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class PaymentApiApplicationTests {
+class CustomerApiApplicationTests {
 
     @Test
     void contextLoads() {

@@ -85,11 +85,22 @@ object Dependencies {
         "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.4"
     )
 
-    val LOGGING = "io.github.microutils:kotlin-logging-jvm:2.1.23"
+    val LOGGING = listOf(
+        "io.github.microutils:kotlin-logging-jvm:2.1.23"
+    )
 
     val TEST = listOf(
         "org.jetbrains.kotlin:kotlin-test",
         "io.mockk:mockk:1.12.3",
-        "org.springframework.boot:spring-boot-starter-test"
+        "org.springframework.boot:spring-boot-starter-test",
+        "io.rest-assured:rest-assured",
+        "com.h2database:h2"
+
+    )
+
+    val COMMON = listOf(
+        // https://mvnrepository.com/artifact/org.springframework/spring-tx
+        "org.springframework:spring-tx",
+        "com.google.guava:guava:31.1-jre",
     )
 }

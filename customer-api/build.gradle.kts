@@ -3,7 +3,7 @@ import org.springframework.boot.gradle.tasks.bundling.BootJar
 val jar: Jar by tasks
 val bootJar: BootJar by tasks
 bootJar.enabled = true
-bootJar.mainClass.set("com.tistory.kmmoon.PaymentApiApplicationKt")
+bootJar.mainClass.set("com.tistory.kmmoon.CustomerApiApplicationKt")
 bootJar.manifest {
     attributes(
         mapOf(
@@ -16,7 +16,7 @@ bootJar.manifest {
 jar.enabled = true
 
 ext {
-    set("mainClassName", "com.tistory.kmmoon.PaymentApiApplicationKt")
+    set("mainClassName", "com.tistory.kmmoon.CustomerApiApplicationKt")
 }
 
 apply<JibConfigPlugin>()
@@ -31,5 +31,10 @@ dependencies {
     implementation(Dependencies.KAFKA_STREAM)
     implementation(Dependencies.FEIGN)
     implementation(Dependencies.REDIS)
+//    testImplementation(project(mapOf("path" to ":common")))
+    testImplementation(Dependencies.TEST)
+    testRuntimeOnly("com.h2database:h2")
+
+    testImplementation(testFixtures(project(":common")))
     kapt(Dependencies.JPA_KAPT)
 }

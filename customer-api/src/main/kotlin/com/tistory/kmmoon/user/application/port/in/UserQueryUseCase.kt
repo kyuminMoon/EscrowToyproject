@@ -1,12 +1,7 @@
-package com.tistory.kmmoon.user.application.port.in;
+package com.tistory.kmmoon.user.application.port.`in`
 
-import java.util.List;
+import com.tistory.kmmoon.user.domain.User
 
-import org.jetbrains.annotations.Nullable;
-
-import com.tistory.kmmoon.user.UserEntity;
-
-public interface UserQueryUseCase {
-  @Nullable
-  List<UserEntity> findAll();
+interface UserQueryUseCase {
+  fun findAll(): List<User?>?
 }

@@ -1,6 +1,9 @@
 package com.tistory.kmmoon.user
 
 import jakarta.persistence.*
+import org.hibernate.Hibernate
+import org.hibernate.annotations.CreationTimestamp
+import org.hibernate.annotations.UpdateTimestamp
 import java.time.LocalDateTime
 
 @Entity
@@ -10,12 +13,13 @@ data class UserEntity(
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false)
   val userId: Long,
-
-  val username: String,
-  val password: String,
-  val email: String,
-  val name: String,
-  val phone: String,
+  var username: String,
+  var password: String,
+  var email: String,
+  var name: String,
+  var phone: String,
+  @CreationTimestamp
   val createdAt: LocalDateTime,
-  val updatedAt: LocalDateTime,
+  @UpdateTimestamp
+  var updatedAt: LocalDateTime,
 )

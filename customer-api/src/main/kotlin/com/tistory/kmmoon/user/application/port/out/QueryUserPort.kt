@@ -1,12 +1,7 @@
-package com.tistory.kmmoon.user.application.port.out;
+package com.tistory.kmmoon.user.application.port.out
 
-import java.util.List;
+import com.tistory.kmmoon.user.UserEntity
 
-import org.jetbrains.annotations.Nullable;
-
-import com.tistory.kmmoon.user.UserEntity;
-
-public interface QueryUserPort {
-  @Nullable
-  List<UserEntity> findAllBy();
+interface QueryUserPort {
+  fun findAllBy(): List<UserEntity?>?
 }

@@ -1,0 +1,16 @@
+spring:
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: create
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        format_sql: true
+    generate-ddl: true
+  datasource:
+    url: jdbc:h2:mem:test/finance
+    username: user
+    password:
+    driver-class-name: org.h2.Driver

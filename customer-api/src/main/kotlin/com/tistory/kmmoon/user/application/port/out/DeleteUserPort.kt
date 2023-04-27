@@ -1,3 +1,3 @@
-package com.tistory.kmmoon.user.application.port.out;
+package com.tistory.kmmoon.user.application.port.out
 
-public interface DeleteUserPort {}
+interface DeleteUserPort 

@@ -12,6 +12,9 @@ plugins {
     id("io.spring.dependency-management")
     id("com.google.cloud.tools.jib")
     id("org.jetbrains.kotlinx.kover")
+    id("java-test-fixtures") // 추가
+    id ("java-library")    //**new**!!
+    id ("maven-publish") //**new**!!
     kotlin("plugin.spring")
     kotlin("plugin.jpa")
     kotlin("jvm")
@@ -92,5 +95,9 @@ allprojects {
         implementation(Dependencies.LOGGING)
         testImplementation(Dependencies.TEST)
         kapt("org.springframework.boot:spring-boot-configuration-processor")
+
+        implementation("org.mapstruct:mapstruct:1.5.5.Final")
+        kapt("org.mapstruct:mapstruct-processor:1.5.5.Final")
+        kaptTest("org.mapstruct:mapstruct-processor:1.5.5.Final")
     }
 }
