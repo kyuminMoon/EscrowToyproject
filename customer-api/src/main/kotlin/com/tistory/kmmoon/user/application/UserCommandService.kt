@@ -18,6 +18,7 @@ class UserCommandService: UserCreateUseCase, UserModifyUseCase, UserDeleteUseCas
 
   @Autowired
   lateinit var mapper: UserMapper
+
   override fun create(request: UserCreateRequest): User {
     val create = createUserPort.create(mapper.createEntity(request))
     return mapper.toData(create)

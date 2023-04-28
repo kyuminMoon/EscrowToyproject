@@ -13,6 +13,7 @@ class UserQueryService: UserQueryUseCase {
   @Autowired
   lateinit var queryUserPort: QueryUserPort
 
+  @Autowired
   lateinit var userMapper: UserMapper
 
   override fun findAll(): List<User>? {
