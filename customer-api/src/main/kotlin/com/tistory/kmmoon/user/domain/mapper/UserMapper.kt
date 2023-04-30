@@ -10,7 +10,7 @@ import org.mapstruct.ReportingPolicy
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 interface UserMapper {
 
-  @Mapping(target = "userId", ignore = true)
+  @Mapping(target = "id", ignore = true)
   fun createEntity(request: UserCreateRequest): UserEntity
 
   fun toData(entity: UserEntity?): User

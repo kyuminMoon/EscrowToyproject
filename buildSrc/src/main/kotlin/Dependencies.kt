@@ -3,6 +3,7 @@ object Dependencies {
     val API = listOf(
         "org.springframework.boot:spring-boot-starter-web",
         "org.springframework.boot:spring-boot-starter-validation",
+        "org.springframework.boot:spring-boot-starter-security",
         "org.springframework.data:spring-data-commons",
         "org.springdoc:springdoc-openapi-ui:${Versions.springDocVersion}",
         "org.springdoc:springdoc-openapi-kotlin:${Versions.springDocVersion}"
@@ -93,14 +94,26 @@ object Dependencies {
         "org.jetbrains.kotlin:kotlin-test",
         "io.mockk:mockk:1.12.3",
         "org.springframework.boot:spring-boot-starter-test",
+        "org.springframework.security:spring-security-test",
         "io.rest-assured:rest-assured",
-        "com.h2database:h2"
-
+        "com.h2database:h2",
     )
 
     val COMMON = listOf(
         // https://mvnrepository.com/artifact/org.springframework/spring-tx
         "org.springframework:spring-tx",
         "com.google.guava:guava:31.1-jre",
+    )
+
+    val CORE = listOf(
+        //security
+        "org.springframework.boot:spring-boot-starter-web",
+        "org.springframework.boot:spring-boot-starter-security",
+        // jwt
+        "io.jsonwebtoken:jjwt-api:0.11.5",
+        "io.jsonwebtoken:jjwt-impl:0.11.5",
+        "io.jsonwebtoken:jjwt-jackson:0.11.5",
+        "org.springframework.boot:spring-boot-starter-validation"
+
     )
 }

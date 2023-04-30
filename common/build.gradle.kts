@@ -20,12 +20,10 @@ dependencies {
     testFixturesImplementation("org.springframework:spring-tx")
     testFixturesImplementation("com.google.guava:guava:31.1-jre")
 
-    testFixturesImplementation("com.querydsl:querydsl-jpa:${Versions.querydslVersion}:jakarta")
-    testFixturesImplementation("com.querydsl:querydsl-apt:${Versions.querydslVersion}:jakarta")
+    testFixturesImplementation("com.querydsl:querydsl-jpa:5.0.0:jakarta")
+    testFixturesImplementation("com.querydsl:querydsl-apt:5.0.0:jakarta")
     testFixturesImplementation("jakarta.persistence:jakarta.persistence-api")
     testFixturesImplementation("jakarta.annotation:jakarta.annotation-api")//    testFixtures(Dependencies.COMMON)
     testFixturesImplementation("org.springframework.boot:spring-boot-starter-web")//    testFixtures(Dependencies.COMMON)
 
-    //testFixture
-//    testFixtures("org.springframework.boot:spring-boot-starter-test")
 }

@@ -1,5 +1,7 @@
 rootProject.name = "escro-payment-toy"
 
+include("common")
+include("core")
 include("payment-rds-entity")
 include("payment-api")
 include("product-rds-entity")
@@ -8,7 +10,6 @@ include("order-rds-entity")
 include("order-api")
 include("customer-rds-entity")
 include("customer-api")
-include("common")
 include("escro-payment-front:payment-front-api")
 findProject(":escro-payment-front:payment-front-api")?.name = "payment-front-api"
 

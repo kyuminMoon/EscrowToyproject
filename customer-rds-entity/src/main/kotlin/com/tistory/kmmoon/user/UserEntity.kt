@@ -1,7 +1,6 @@
 package com.tistory.kmmoon.user
 
 import jakarta.persistence.*
-import org.hibernate.Hibernate
 import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.UpdateTimestamp
 import java.time.LocalDateTime
@@ -12,14 +11,22 @@ data class UserEntity(
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false)
-  val userId: Long,
-  var username: String,
-  var password: String,
+  val id: Long? = null,
   var email: String,
+  var password: String,
   var name: String,
   var phone: String,
+
+  @ManyToMany
+  @JoinTable(
+    name = "account_authority",
+    joinColumns = [JoinColumn(name = "user_id")],
+    inverseJoinColumns = [JoinColumn(name = "authority_name")]
+  )
+  var authorities: Set<Authority>,
+
   @CreationTimestamp
-  val createdAt: LocalDateTime,
+  val createdAt: LocalDateTime? = null,
   @UpdateTimestamp
-  var updatedAt: LocalDateTime,
+  var updatedAt: LocalDateTime? = null,
 )

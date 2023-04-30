@@ -21,7 +21,6 @@ internal class UserServiceTest : DatabaseCleanupBefore() {
 
   var request = UserCreateRequest(
     password = "password",
-    username = "username",
     email = "email@email.com",
     name = "name",
     phone = "010-0000-0000"
@@ -34,7 +33,7 @@ internal class UserServiceTest : DatabaseCleanupBefore() {
     val userList = userQueryService.findAll() ?: emptyList()
 
     assertAll(
-      { assertThat(userList.first().userId).isEqualTo(userData.userId) }, //
+      { assertThat(userList.first().id).isEqualTo(userData.id) }, //
     )
   }
 }
