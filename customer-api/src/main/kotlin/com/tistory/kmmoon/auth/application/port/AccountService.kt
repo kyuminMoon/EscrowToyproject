@@ -12,17 +12,28 @@ import com.tistory.kmmoon.user.Authority
 import com.tistory.kmmoon.user.UserEntity
 import com.tistory.kmmoon.user.UserRole
 import com.tistory.kmmoon.user.domain.request.UserCreateRequest
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.core.context.SecurityContextHolder
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 
 @Service
 class AccountService(
+
   private val tokenProvider: TokenProvider,
+
   private val authenticationManagerBuilder: AuthenticationManagerBuilder,
+
+  @Autowired
   private val signupPort: AuthSignupPort,
-  private val loginPort: AuthLoginPort
+
+  @Autowired
+  private val loginPort: AuthLoginPort,
+
+  @Autowired
+  private val passwordEncoder: PasswordEncoder
 ) : AuthLoginUseCase, AuthSignupUseCase {
 
   // username 과 패스워드로 사용자를 인증하여 액세스토큰을 반환한다.
@@ -45,20 +56,22 @@ class AccountService(
     if(existsEmail)
       throw UserGuideException(ErrorMessage.ALREADY_IN_USE)
 
+    val encodePassword = passwordEncoder.encode(request.password)
+
     // 회원가입 로직 추가
     val authorities = listOf(Authority(authorityName = UserRole.ROLE_USER)).toSet()
 
     val userEntity = UserEntity(
-      name = request.name,
-      password = request.password,
       email = request.email,
+      password = encodePassword,
+      name = request.name,
       phone = request.phone,
       authorities = authorities,
     )
 
     signupPort.signup(userEntity)
 
-    return authLoginResponse(request.email, request.password)
+    return authLoginResponse(request.email, encodePassword)
   }
 
 

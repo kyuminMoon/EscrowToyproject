@@ -16,4 +16,8 @@ class UserCommandPersistenceAdapter: CreateUserPort, ModifyUserPort, DeleteUserP
     return userRepository.save(userEntity);
   }
 
+  override fun existsEmail(email: String): Boolean {
+    return userRepository.existsByEmail(email)
+  }
+
 }

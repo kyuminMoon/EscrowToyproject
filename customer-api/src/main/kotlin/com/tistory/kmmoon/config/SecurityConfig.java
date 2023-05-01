@@ -1,17 +1,17 @@
 package com.tistory.kmmoon.config;
 
+import java.util.List;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 import com.tistory.kmmoon.core.config.JwtSecurityConfig;
@@ -20,7 +20,6 @@ import com.tistory.kmmoon.core.security.JwtAuthenticationEntryPoint;
 import com.tistory.kmmoon.core.security.TokenProvider;
 
 @Configuration
-@EnableWebSecurity
 public class SecurityConfig {
     private final TokenProvider tokenProvider;
     private final CorsFilter corsFilter;
@@ -40,13 +39,6 @@ public class SecurityConfig {
         this.jwtAccessDeniedHandler = jwtAccessDeniedHandler;
     }
 
-    // BCryptPasswordEncoder 라는 패스워드 인코더 사용
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
         return web -> web.ignoring()
@@ -62,6 +54,9 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity.cors()
+            .configurationSource(getCorsConfigurationSource());
+
         httpSecurity
             // token을 사용하는 방식이기 때문에 csrf를 disable합니다.
             .csrf().disable()
@@ -85,13 +80,27 @@ public class SecurityConfig {
 
             // api 경로
             .and()
-            .authorizeHttpRequests()
-            .requestMatchers("/api/auth/signup").permitAll() // 회원가입 경로는 인증없이 호출 가능
-            .anyRequest().authenticated() // 나머지 경로는 jwt 인증 해야함
+            .authorizeHttpRequests(request -> request
+                .requestMatchers(HttpMethod.POST, "/**/auth/**").permitAll() // 회원가입 경로는 인증없이 호출 가능
+                .requestMatchers("/**/admin/**").hasRole("ADMIN")
+                .requestMatchers("/**/users/**").hasRole("USER")
 
-            .and()
+                .anyRequest().authenticated() // 나머지 경로는 jwt 인증 해야함
+            )
             .apply(new JwtSecurityConfig(tokenProvider)); // JwtSecurityConfig 적용
         return httpSecurity.build();
     }
 
+
+    private CorsConfigurationSource getCorsConfigurationSource() {
+        return request -> {
+            var cors = new CorsConfiguration();
+
+            cors.setAllowedOrigins(List.of("*"));
+            cors.setAllowedHeaders(List.of("*"));
+            cors.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
+
+            return cors;
+        };
+    }
 }

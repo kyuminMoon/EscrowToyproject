@@ -21,8 +21,8 @@ class AuthController {
   lateinit var authSignupUseCase: AuthSignupUseCase
 
   @GetMapping("/login")
-  fun authorize(@Valid @RequestBody loginDto: AuthLoginRequest): ResponseEntity<AuthLoginResponse> {
-    val token: AuthLoginResponse = authLoginUseCase.login(loginDto.email, loginDto.password)
+  fun authorize(@Valid @RequestBody request: AuthLoginRequest): ResponseEntity<AuthLoginResponse> {
+    val token: AuthLoginResponse = authLoginUseCase.login(request.email, request.password)
 
     // response header 에도 넣고 응답 객체에도 넣는다.
     val httpHeaders = HttpHeaders()

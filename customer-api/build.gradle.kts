@@ -32,10 +32,10 @@ dependencies {
     implementation(Dependencies.KAFKA_STREAM)
     implementation(Dependencies.FEIGN)
     implementation(Dependencies.REDIS)
-//    testImplementation(project(mapOf("path" to ":common")))
     testImplementation(Dependencies.TEST)
+    testImplementation(project(":core"))
+    testImplementation(testFixtures(project(":common")))
     testRuntimeOnly("com.h2database:h2")
 
-    testImplementation(testFixtures(project(":common")))
     kapt(Dependencies.JPA_KAPT)
 }

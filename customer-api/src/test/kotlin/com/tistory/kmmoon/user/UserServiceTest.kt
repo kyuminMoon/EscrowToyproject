@@ -1,4 +1,4 @@
-package com.tistory.kmmoon.user.service
+package com.tistory.kmmoon.user
 
 import com.tistory.kmmoon.config.DatabaseCleanupBefore
 import com.tistory.kmmoon.user.application.UserCommandService

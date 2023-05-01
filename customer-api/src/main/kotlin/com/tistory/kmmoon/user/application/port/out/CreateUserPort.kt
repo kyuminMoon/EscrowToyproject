@@ -4,4 +4,6 @@ import com.tistory.kmmoon.user.UserEntity
 
 interface CreateUserPort {
   fun create(userEntity: UserEntity): UserEntity
+
+  fun existsEmail(email: String): Boolean
 }
