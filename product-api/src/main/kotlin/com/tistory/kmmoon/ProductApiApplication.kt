@@ -6,8 +6,8 @@ import org.springframework.context.annotation.ComponentScan
 
 @SpringBootApplication
 @ComponentScan(basePackages = ["com.tistory.kmmoon"])
-class PaymentApiApplication
+class ProductApiApplication
 
 fun main(args: Array<String>) {
-    runApplication<PaymentApiApplication>(*args)
+    runApplication<ProductApiApplication>(*args)
 }

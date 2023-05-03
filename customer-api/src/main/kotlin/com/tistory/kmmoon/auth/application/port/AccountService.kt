@@ -77,7 +77,7 @@ class AccountService(
 
   private fun authLoginResponse(email: String, password: String): AuthLoginResponse {
     // 받아온 유저네임과 패스워드를 이용해 UsernamePasswordAuthenticationToken 객체 생성
-    val authenticationToken = UsernamePasswordAuthenticationToken(email, password)
+    val authenticationToken: UsernamePasswordAuthenticationToken = UsernamePasswordAuthenticationToken(email, password)
 
     // authenticationToken 객체를 통해 Authentication 객체 생성
     // 이 과정에서 CustomUserDetailsService 에서 우리가 재정의한 loadUserByUsername 메서드 호출
