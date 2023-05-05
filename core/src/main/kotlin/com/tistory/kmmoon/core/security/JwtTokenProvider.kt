@@ -6,22 +6,28 @@ import io.jsonwebtoken.security.Keys
 import io.jsonwebtoken.security.SecurityException
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.annotation.Configurable
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.User
+import org.springframework.stereotype.Component
 import java.security.Key
 import java.util.*
 import java.util.stream.Collectors
 
 
 // 토큰 생성, 검증
-class TokenProvider(secret: String, tokenValidityInSeconds: Long, refreshTokenValidityInSeconds: Long) {
-  val log: Logger = LoggerFactory.getLogger(TokenProvider::class.java)
-  val accessTokenValidityInMilliseconds: Long
-  val refreshTokenValidityInMilliseconds: Long
-  var key: Key
+//@Configurable
+@Component
+class JwtTokenProvider(@Value("\${jwt.secret}") secret: String, @Value("\${jwt.access-token-validity-in-seconds}") tokenValidityInSeconds: Long, @Value("\${jwt.refresh-token-validity-in-seconds}") refreshTokenValidityInSeconds: Long) {
+
+  val log: Logger = LoggerFactory.getLogger(JwtTokenProvider::class.java)
+  final val accessTokenValidityInMilliseconds: Long
+  final val refreshTokenValidityInMilliseconds: Long
+  lateinit var key: Key
 
   init {
     accessTokenValidityInMilliseconds = tokenValidityInSeconds * 1000
@@ -42,7 +48,7 @@ class TokenProvider(secret: String, tokenValidityInSeconds: Long, refreshTokenVa
     return Jwts.builder()
       .setSubject(authentication.name)
       .claim(AUTHORITIES_KEY, authorities)
-      .signWith(key, SignatureAlgorithm.HS512)
+      .signWith(key, SignatureAlgorithm.HS256)
       .setExpiration(validity)
       .compact()
   }
@@ -56,7 +62,7 @@ class TokenProvider(secret: String, tokenValidityInSeconds: Long, refreshTokenVa
     return Jwts.builder()
       .setSubject(authentication.name)
       .claim(AUTHORITIES_KEY, authorities)
-      .signWith(key, SignatureAlgorithm.HS512)
+      .signWith(key, SignatureAlgorithm.HS256)
       .setExpiration(validity)
       .compact()
   }

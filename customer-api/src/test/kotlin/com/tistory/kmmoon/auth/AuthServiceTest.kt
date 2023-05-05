@@ -2,17 +2,14 @@ package com.tistory.kmmoon.auth
 
 import com.tistory.kmmoon.auth.application.port.AccountService
 import com.tistory.kmmoon.config.DatabaseCleanupBefore
-import com.tistory.kmmoon.core.security.TokenProvider
+import com.tistory.kmmoon.core.security.JwtTokenProvider
 import com.tistory.kmmoon.user.domain.request.UserCreateRequest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertAll
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.dao.DataIntegrityViolationException
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
-import org.springframework.security.crypto.password.PasswordEncoder
 
 @ComponentScan(basePackages = [
   "com.tistory.kmmoon"
@@ -22,7 +19,7 @@ internal class AuthServiceTest : DatabaseCleanupBefore() {
   @Autowired
   lateinit var accountService: AccountService
 
-  lateinit var tokenProvider: TokenProvider
+  lateinit var tokenProvider: JwtTokenProvider
 
   var request = UserCreateRequest(
     email = "email@email.com",

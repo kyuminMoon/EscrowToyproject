@@ -7,7 +7,7 @@ import com.tistory.kmmoon.auth.application.port.out.AuthSignupPort
 import com.tistory.kmmoon.auth.domain.response.AuthLoginResponse
 import com.tistory.kmmoon.core.exception.ErrorMessage
 import com.tistory.kmmoon.core.exception.UserGuideException
-import com.tistory.kmmoon.core.security.TokenProvider
+import com.tistory.kmmoon.core.security.JwtTokenProvider
 import com.tistory.kmmoon.user.Authority
 import com.tistory.kmmoon.user.UserEntity
 import com.tistory.kmmoon.user.UserRole
@@ -22,8 +22,10 @@ import org.springframework.stereotype.Service
 @Service
 class AccountService(
 
-  private val tokenProvider: TokenProvider,
+  @Autowired
+  private val tokenProvider: JwtTokenProvider,
 
+  @Autowired
   private val authenticationManagerBuilder: AuthenticationManagerBuilder,
 
   @Autowired
@@ -71,13 +73,13 @@ class AccountService(
 
     signupPort.signup(userEntity)
 
-    return authLoginResponse(request.email, encodePassword)
+    return authLoginResponse(request.email, request.password)
   }
 
 
   private fun authLoginResponse(email: String, password: String): AuthLoginResponse {
     // 받아온 유저네임과 패스워드를 이용해 UsernamePasswordAuthenticationToken 객체 생성
-    val authenticationToken: UsernamePasswordAuthenticationToken = UsernamePasswordAuthenticationToken(email, password)
+    val authenticationToken = UsernamePasswordAuthenticationToken(email, password)
 
     // authenticationToken 객체를 통해 Authentication 객체 생성
     // 이 과정에서 CustomUserDetailsService 에서 우리가 재정의한 loadUserByUsername 메서드 호출

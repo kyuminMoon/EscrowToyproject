@@ -1,7 +1,7 @@
 server:
   port: 8081
-#  servlet:
-#    contextPath: /api
+  servlet:
+    contextPath: /api
 
 spring:
   datasource:
@@ -10,6 +10,7 @@ spring:
     password: password
 
   jpa:
+    open-in-view: false
     show-sql: true
     hibernate:
       ddl-auto: create
@@ -24,8 +25,7 @@ spring:
       enabled: always
 
   profiles:
-    include:
-      - local
+    include: local
 
 jwt:
   header: Authorization
@@ -35,4 +35,9 @@ jwt:
 
 logging:
   level:
+    org.springframework.web.client: DEBUG
     org.hibernate.type: TRACE
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql: trace
+    org.hibernate.orm.jdbc.bind: trace
+    org.hibernate.stat: debug

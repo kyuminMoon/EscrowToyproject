@@ -28,10 +28,12 @@ dependencies {
 
     implementation(Dependencies.API)
     implementation(Dependencies.JPA)
-    implementation(Dependencies.KAFKA)
-    implementation(Dependencies.KAFKA_STREAM)
-    implementation(Dependencies.FEIGN)
-    implementation(Dependencies.REDIS)
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
+
+//    implementation(Dependencies.KAFKA)
+//    implementation(Dependencies.KAFKA_STREAM)
+//    implementation(Dependencies.FEIGN)
+//    implementation(Dependencies.REDIS)
     testImplementation(Dependencies.TEST)
     testImplementation(project(":core"))
     testImplementation(testFixtures(project(":common")))

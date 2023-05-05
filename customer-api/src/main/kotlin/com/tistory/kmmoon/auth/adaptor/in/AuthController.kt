@@ -4,7 +4,6 @@ import com.tistory.kmmoon.auth.application.port.`in`.AuthLoginUseCase
 import com.tistory.kmmoon.auth.application.port.`in`.AuthSignupUseCase
 import com.tistory.kmmoon.auth.domain.request.AuthLoginRequest
 import com.tistory.kmmoon.auth.domain.response.AuthLoginResponse
-import com.tistory.kmmoon.core.security.JwtFilter
 import com.tistory.kmmoon.user.domain.request.UserCreateRequest
 import jakarta.validation.Valid
 import org.springframework.http.HttpHeaders
@@ -15,10 +14,10 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/auth")
-class AuthController {
-
-  lateinit var authLoginUseCase: AuthLoginUseCase
-  lateinit var authSignupUseCase: AuthSignupUseCase
+class AuthController (
+  private var authLoginUseCase: AuthLoginUseCase,
+  private var authSignupUseCase: AuthSignupUseCase
+) {
 
   @GetMapping("/login")
   fun authorize(@Valid @RequestBody request: AuthLoginRequest): ResponseEntity<AuthLoginResponse> {
@@ -26,7 +25,7 @@ class AuthController {
 
     // response header 에도 넣고 응답 객체에도 넣는다.
     val httpHeaders = HttpHeaders()
-    httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + token.accessToken)
+    httpHeaders.add("Authorization", "Bearer " + token.accessToken)
     return ResponseEntity(token, httpHeaders, HttpStatus.OK)
   }
 

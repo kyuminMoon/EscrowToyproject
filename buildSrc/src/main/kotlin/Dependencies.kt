@@ -5,8 +5,9 @@ object Dependencies {
         "org.springframework.boot:spring-boot-starter-validation",
         "org.springframework.boot:spring-boot-starter-security",
         "org.springframework.data:spring-data-commons",
-        "org.springdoc:springdoc-openapi-ui:${Versions.springDocVersion}",
-        "org.springdoc:springdoc-openapi-kotlin:${Versions.springDocVersion}"
+//        "org.springdoc:springdoc-openapi-ui:${Versions.springDocVersion}",
+//        "org.springdoc:springdoc-openapi-kotlin:${Versions.springDocVersion}",
+        "org.springframework.boot:spring-boot-starter-actuator"
     )
 
     val BATCH = listOf(

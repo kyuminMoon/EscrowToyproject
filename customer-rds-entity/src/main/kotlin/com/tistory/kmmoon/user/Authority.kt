@@ -10,6 +10,7 @@ data class Authority (
   @Column(name = "id", nullable = false)
   val id: Long? = null,
 
+  @Enumerated(EnumType.STRING)
   @Column(name = "authority_name", length = 50)
   val authorityName: UserRole,
 
