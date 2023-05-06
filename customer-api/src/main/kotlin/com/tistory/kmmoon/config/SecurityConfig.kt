@@ -30,7 +30,7 @@ class SecurityConfig // 생성자 통해 스프링 빈 주입받는다.
 ) {
 
     @Bean
-    fun passwordEncoder() = BCryptPasswordEncoder()
+    fun passwordEncoder() = BCryptPasswordEncoder(12)
 
     @Bean
     @Throws(Exception::class)
@@ -70,7 +70,7 @@ class SecurityConfig // 생성자 통해 스프링 빈 주입받는다.
                     .requestMatchers("/api/auth/**").permitAll()
                     .requestMatchers("/auth/**").permitAll()
                     .requestMatchers("/api/auth/signup").permitAll() // 이 줄을 추가하여 /api/auth/signup 경로에 대한 인증 제외
-                    .requestMatchers("/api/auth/login").permitAll() // 이 줄을 추가하여 /api/auth/signup 경로에 대한 인증 제외
+                    .requestMatchers("/api/auth/login").permitAll() //
                     .requestMatchers("/user/**").hasRole("USER")
                     .requestMatchers("/admin/**").hasRole("ADMIN")
                     .anyRequest().authenticated()

@@ -6,7 +6,6 @@ import io.jsonwebtoken.security.Keys
 import io.jsonwebtoken.security.SecurityException
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import org.springframework.beans.factory.annotation.Configurable
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
@@ -48,6 +47,7 @@ class JwtTokenProvider(@Value("\${jwt.secret}") secret: String, @Value("\${jwt.a
     return Jwts.builder()
       .setSubject(authentication.name)
       .claim(AUTHORITIES_KEY, authorities)
+      .claim(TOKEN_TYPE_KEY, ACCESS_TOKEN_TYPE)
       .signWith(key, SignatureAlgorithm.HS256)
       .setExpiration(validity)
       .compact()
@@ -62,6 +62,7 @@ class JwtTokenProvider(@Value("\${jwt.secret}") secret: String, @Value("\${jwt.a
     return Jwts.builder()
       .setSubject(authentication.name)
       .claim(AUTHORITIES_KEY, authorities)
+      .claim(TOKEN_TYPE_KEY, REFRESH_TOKEN_TYPE)
       .signWith(key, SignatureAlgorithm.HS256)
       .setExpiration(validity)
       .compact()
@@ -86,9 +87,41 @@ class JwtTokenProvider(@Value("\${jwt.secret}") secret: String, @Value("\${jwt.a
   }
 
   // 토큰 유효성 검사
-  fun validateToken(token: String?): Boolean {
+  fun validateAccessToken(token: String?): Boolean {
     try {
       val claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).body
+      val tokenType = claims.get("token_type")
+
+      if (tokenType != null) {
+        return tokenType == ACCESS_TOKEN_TYPE
+      }
+    } catch (e: SecurityException) {
+      log.info("잘못된 JWT 서명입니다.")
+      e.printStackTrace()
+    } catch (e: MalformedJwtException) {
+      log.info("잘못된 JWT 서명입니다.")
+      e.printStackTrace()
+    } catch (e: ExpiredJwtException) {
+      log.info("만료된 JWT 토큰입니다.")
+      e.printStackTrace()
+    } catch (e: UnsupportedJwtException) {
+      log.info("지원되지 않는 JWT 토큰입니다.")
+      e.printStackTrace()
+    } catch (e: IllegalArgumentException) {
+      log.info("JWT 토큰이 잘못되었습니다.")
+      e.printStackTrace()
+    }
+    return false
+  }
+
+  fun validateRefreshToken(token: String?): Boolean {
+    try {
+      val claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).body
+      val tokenType = claims.get("token_type")
+
+      if (tokenType != null) {
+        return tokenType == REFRESH_TOKEN_TYPE
+      }
       return true
     } catch (e: SecurityException) {
       log.info("잘못된 JWT 서명입니다.")
@@ -106,5 +139,8 @@ class JwtTokenProvider(@Value("\${jwt.secret}") secret: String, @Value("\${jwt.a
 
   companion object {
     const val AUTHORITIES_KEY = "auth"
+    const val TOKEN_TYPE_KEY = "token_type"
+    const val ACCESS_TOKEN_TYPE = "access"
+    const val REFRESH_TOKEN_TYPE = "refresh"
   }
 }

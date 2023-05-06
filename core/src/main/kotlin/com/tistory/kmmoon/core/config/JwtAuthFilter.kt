@@ -1,15 +1,14 @@
 package com.tistory.kmmoon.core.config
 
 import com.tistory.kmmoon.core.security.CustomUserDetailsService
+import com.tistory.kmmoon.core.security.JwtTokenProvider
 import jakarta.servlet.FilterChain
 import jakarta.servlet.ServletException
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.http.HttpHeaders
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
+import org.springframework.security.core.Authentication
 import org.springframework.security.core.context.SecurityContextHolder
-import org.springframework.security.web.authentication.WebAuthenticationDetailsSource
+import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.stereotype.Component
 import org.springframework.web.filter.OncePerRequestFilter
 import java.io.IOException
@@ -17,7 +16,7 @@ import java.io.IOException
 @Component
 class JwtAuthFilter(
     private val jpaUserDetailsService: CustomUserDetailsService,
-    private val jwtUtils: JwtUtils
+    private val jwtTokenProvider: JwtTokenProvider
 ) : OncePerRequestFilter() {
 
     @Throws(ServletException::class, IOException::class)
@@ -26,38 +25,22 @@ class JwtAuthFilter(
         response: HttpServletResponse,
         filterChain: FilterChain
     ) {
-        val authHeader = request.getHeader(HttpHeaders.AUTHORIZATION)
-        val userEmail: String?
-        val jwtToken: String? = null
-        if (authHeader == null || !authHeader.startsWith("Bearer")) {
-            filterChain.doFilter(request, response)
-            return
+
+        // 헤더에 Authorization이 있다면 가져온다.
+        val authorizationHeader: String = request.getHeader("Authorization") ?: return filterChain.doFilter(request, response)
+        // Bearer타입 토큰이 있을 때 가져온다.
+        val token = authorizationHeader.substring("Bearer ".length)
+
+        // 토큰 검증
+        if (jwtTokenProvider.validateAccessToken(token)) {
+            // token으로 AuthenticationToken 생성
+            val authentication: Authentication = jwtTokenProvider.getAuthentication(token)
+//            jpaUserDetailsService.loadUserByUsername(authentication.name).username ?: return filterChain.doFilter(request, response)
+
+            // 생성된 AuthenticationToken을 SecurityContext가 관리하도록 설정
+            SecurityContextHolder.getContext().authentication = authentication
         }
 
-//        for (Cookie cookie : request.getCookies()) {
-//            if (cookie.getName().equals("jwt")) {
-//                jwtToken = cookie.getValue();
-//                System.out.println(cookie.getValue());
-//            }
-//        }
-        if (jwtToken == null) {
-            filterChain.doFilter(request, response)
-            return
-        }
-
-//        jwtToken = authHeader.substring(7);
-        userEmail = jwtUtils.extractUsername(jwtToken)
-        if (userEmail != null && SecurityContextHolder.getContext().authentication == null) {
-            val userDetails = jpaUserDetailsService.loadUserByUsername(userEmail)
-            if (jwtUtils.validateToken(jwtToken, userDetails)) {
-                val authToken = UsernamePasswordAuthenticationToken(
-                    userDetails,
-                    null, userDetails.authorities
-                )
-                authToken.details = WebAuthenticationDetailsSource().buildDetails(request)
-                SecurityContextHolder.getContext().authentication = authToken
-            }
-        }
         filterChain.doFilter(request, response)
     }
 }

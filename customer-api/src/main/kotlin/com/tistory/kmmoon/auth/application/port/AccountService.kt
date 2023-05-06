@@ -8,6 +8,7 @@ import com.tistory.kmmoon.auth.domain.response.AuthLoginResponse
 import com.tistory.kmmoon.core.exception.ErrorMessage
 import com.tistory.kmmoon.core.exception.UserGuideException
 import com.tistory.kmmoon.core.security.JwtTokenProvider
+import com.tistory.kmmoon.core.security.UserSecurity
 import com.tistory.kmmoon.user.Authority
 import com.tistory.kmmoon.user.UserEntity
 import com.tistory.kmmoon.user.UserRole
@@ -15,6 +16,7 @@ import com.tistory.kmmoon.user.domain.request.UserCreateRequest
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
+import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
@@ -42,14 +44,13 @@ class AccountService(
   @Throws(UserGuideException::class)
   override fun login(email: String, password: String): AuthLoginResponse {
     // 유저 로그인 로직 추가 email + password
-    val isSuccess = loginPort.login(email, password) != null
+    val userEntity : UserEntity = loginPort.findByEmail(email) ?: throw UserGuideException("해당 유저를 찾을 수 없습니다.")
 
-    if(isSuccess)
+    if(!passwordEncoder.matches(password, userEntity.password))
       throw UserGuideException(ErrorMessage.LOGIN_FAILED)
 
-    return authLoginResponse(email, password)
+    return authLoginResponse(email, password, UserSecurity(userEntity).authorities)
   }
-
   @Throws(UserGuideException::class)
   override fun signUp(request: UserCreateRequest): AuthLoginResponse? {
     // 유저 검증 로직 추가
@@ -71,15 +72,15 @@ class AccountService(
       authorities = authorities,
     )
 
-    signupPort.signup(userEntity)
+    val signup = signupPort.signup(userEntity)
 
-    return authLoginResponse(request.email, request.password)
+    return authLoginResponse(request.email, request.password, UserSecurity(userEntity).authorities)
   }
 
 
-  private fun authLoginResponse(email: String, password: String): AuthLoginResponse {
+  private fun authLoginResponse(email: String, password: String, authorities: Collection<GrantedAuthority?>): AuthLoginResponse {
     // 받아온 유저네임과 패스워드를 이용해 UsernamePasswordAuthenticationToken 객체 생성
-    val authenticationToken = UsernamePasswordAuthenticationToken(email, password)
+    val authenticationToken = UsernamePasswordAuthenticationToken(email, password, authorities)
 
     // authenticationToken 객체를 통해 Authentication 객체 생성
     // 이 과정에서 CustomUserDetailsService 에서 우리가 재정의한 loadUserByUsername 메서드 호출

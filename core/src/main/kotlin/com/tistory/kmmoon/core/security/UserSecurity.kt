@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails
 class UserSecurity(private val users: UserEntity) : UserDetails {
     override fun getAuthorities(): Collection<GrantedAuthority?> {
         return users.authorities.stream()
-            .map { auth: Authority -> SimpleGrantedAuthority(auth.toString()) }
+            .map { auth: Authority -> SimpleGrantedAuthority(auth.authorityName.name) }
             .toList()
     }
 

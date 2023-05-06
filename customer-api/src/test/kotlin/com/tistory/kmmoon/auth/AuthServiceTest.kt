@@ -31,8 +31,8 @@ internal class AuthServiceTest : DatabaseCleanupBefore() {
   @Test
   fun 회원가입() {
     val tokenInfo = accountService.signUp(request)
-    val accessTokenIsValid = tokenProvider.validateToken(tokenInfo?.accessToken)
-    val refreshTokenIsValid = tokenProvider.validateToken(tokenInfo?.refreshToken)
+    val accessTokenIsValid = tokenProvider.validateAccessToken(tokenInfo?.accessToken)
+    val refreshTokenIsValid = tokenProvider.validateAccessToken(tokenInfo?.refreshToken)
     assertAll(
       { assertThat(accessTokenIsValid).isTrue() }, //
       { assertThat(refreshTokenIsValid).isTrue() }, //

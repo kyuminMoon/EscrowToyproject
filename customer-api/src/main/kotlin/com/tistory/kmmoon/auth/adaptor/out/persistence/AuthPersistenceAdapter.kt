@@ -16,8 +16,8 @@ class AuthPersistenceAdapter: AuthLoginPort, AuthSignupPort {
   @Autowired
   lateinit var authorityRepository: AuthorityRepository
 
-  override fun login(email: String, password: String): UserEntity {
-    return userRepository.findByEmailAndPassword(email, password);
+  override fun findByEmail(email: String): UserEntity? {
+    return userRepository.findByEmail(email);
   }
 
   override fun signup(userEntity: UserEntity): UserEntity? {

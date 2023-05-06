@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/user/users")
-class UserController {
+@RequestMapping("/admin/users")
+class UserAdminController {
 
   @Autowired
   private lateinit var userQueryUseCase: UserQueryUseCase

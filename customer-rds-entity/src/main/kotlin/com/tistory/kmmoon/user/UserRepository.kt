@@ -8,9 +8,9 @@ import java.util.Optional
 @Repository
 interface UserRepository : JpaRepository<UserEntity, Long> {
   fun findAllBy(): List<UserEntity>
-  fun findByEmailAndPassword(email: String?, password: String?): UserEntity
   fun existsByEmail(email: String): Boolean
-  @EntityGraph(attributePaths = ["authorities"])
   fun findByEmail(email: String): UserEntity?
+  @EntityGraph(attributePaths = ["authorities"])
+  fun findOneWithAuthoritiesByEmail(email: String): UserEntity?
 
 }

@@ -18,11 +18,11 @@ data class UserEntity(
   var name: String,
   var phone: String,
 
-  @ManyToMany
+  @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(
-    name = "account_authority",
-    joinColumns = [JoinColumn(name = "user_id")],
-    inverseJoinColumns = [JoinColumn(name = "authority_name")]
+    name = "authorities",
+    joinColumns = [ JoinColumn(name = "user_id") ],
+    inverseJoinColumns = [ JoinColumn(name = "authority_id") ]
   )
   var authorities: Set<Authority>,
 

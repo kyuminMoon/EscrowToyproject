@@ -19,7 +19,7 @@ class AuthController (
   private var authSignupUseCase: AuthSignupUseCase
 ) {
 
-  @GetMapping("/login")
+  @PostMapping("/login")
   fun authorize(@Valid @RequestBody request: AuthLoginRequest): ResponseEntity<AuthLoginResponse> {
     val token: AuthLoginResponse = authLoginUseCase.login(request.email, request.password)
 

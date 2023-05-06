@@ -1,5 +1,5 @@
 package com.tistory.kmmoon.user
 
-enum class UserRole {
-  ROLE_ADMIN, ROLE_USER
+enum class UserRole(val value: String) {
+  ROLE_ADMIN("ADMIN"), ROLE_USER("USER")
 }
