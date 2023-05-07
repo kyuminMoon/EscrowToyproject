@@ -8,16 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 @Component
-class UserQueryService: UserQueryUseCase {
-
-  @Autowired
-  lateinit var queryUserPort: QueryUserPort
-
-  @Autowired
-  lateinit var userMapper: UserMapper
+class UserQueryService(
+  var queryUserPort: QueryUserPort,
+  var userMapper: UserMapper
+): UserQueryUseCase {
 
   override fun findAll(): List<User>? {
     return userMapper.toData(queryUserPort.findAllBy());
+  }
+
+  override fun findUserInfo(userId: Long): User? {
+    return userMapper.toData(queryUserPort.findById(userId));
   }
 
 }

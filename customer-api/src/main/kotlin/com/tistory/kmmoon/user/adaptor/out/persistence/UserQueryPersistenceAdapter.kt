@@ -7,13 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 @Component
-class UserQueryPersistenceAdapter: QueryUserPort {
-
-  @Autowired
-  lateinit var userRepository: UserRepository;
+class UserQueryPersistenceAdapter(
+  var userRepository: UserRepository
+): QueryUserPort {
 
   override fun findAllBy(): List<UserEntity> {
-    return userRepository.findAllBy();
+    return userRepository.findAllBy()
+  }
+
+  override fun findById(userId: Long): UserEntity? {
+    return userRepository.findById(userId).orElse(null)
   }
 
 }

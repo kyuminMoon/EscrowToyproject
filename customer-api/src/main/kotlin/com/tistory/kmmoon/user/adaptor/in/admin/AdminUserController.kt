@@ -1,4 +1,4 @@
-package com.tistory.kmmoon.user.adaptor.`in`
+package com.tistory.kmmoon.user.adaptor.`in`.admin
 
 import com.tistory.kmmoon.user.application.port.`in`.UserCreateUseCase
 import com.tistory.kmmoon.user.application.port.`in`.UserDeleteUseCase
@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/user/users")
-class UserController {
+@RequestMapping("/admin/users")
+class AdminUserController {
 
   @Autowired
   private lateinit var userQueryUseCase: UserQueryUseCase
