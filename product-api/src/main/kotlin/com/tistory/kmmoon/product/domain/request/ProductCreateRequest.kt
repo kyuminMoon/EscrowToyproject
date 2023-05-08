@@ -1,15 +1,9 @@
-package com.tistory.kmmoon.product
+package com.tistory.kmmoon.product.domain.request
 
-import jakarta.persistence.*
 import java.math.BigDecimal
 import java.time.LocalDateTime
 
-@Entity
-@Table(name = "products")
-data class ProductEntity(
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id", nullable = false)
+data class ProductCreateRequest(
   val id: Long,
   val userId: Long,
   val name: String,
