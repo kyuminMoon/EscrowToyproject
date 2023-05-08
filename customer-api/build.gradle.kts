@@ -28,8 +28,6 @@ dependencies {
 
     implementation(Dependencies.API)
     implementation(Dependencies.JPA)
-    implementation("org.springframework.boot:spring-boot-starter-actuator")
-
 //    implementation(Dependencies.KAFKA)
 //    implementation(Dependencies.KAFKA_STREAM)
 //    implementation(Dependencies.FEIGN)
