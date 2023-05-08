@@ -9,17 +9,13 @@ import com.tistory.kmmoon.user.application.port.out.CreateUserPort
 import com.tistory.kmmoon.user.domain.User
 import com.tistory.kmmoon.user.domain.mapper.UserMapper
 import com.tistory.kmmoon.user.domain.request.UserCreateRequest
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 @Component
-class UserCommandService: UserCreateUseCase, UserModifyUseCase, UserDeleteUseCase {
-
-  @Autowired
-  lateinit var createUserPort: CreateUserPort
-
-  @Autowired
-  lateinit var mapper: UserMapper
+class UserCommandService(
+  var createUserPort: CreateUserPort,
+  var mapper: UserMapper
+): UserCreateUseCase, UserModifyUseCase, UserDeleteUseCase {
 
   override fun create(request: UserCreateRequest): User {
     // 유저 검증 로직 추가
