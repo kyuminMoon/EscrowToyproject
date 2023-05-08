@@ -107,15 +107,16 @@
 
 ### 2. 상품 테이블 (products)
 
-| 컬럼명          | 타입        | 설명               |
-|-----------------|-------------|--------------------|
-| product_id (PK) | INT         | 상품 고유 식별자      |
-| name            | VARCHAR     | 상품명             |
-| description     | TEXT        | 상품 설명           |
-| price           | DECIMAL     | 상품 가격           |
-| stock           | INT         | 재고 수량           |
-| created_at      | TIMESTAMP   | 생성일시            |
-| updated_at      | TIMESTAMP   | 수정일시            |
+| 컬럼명              | 타입        | 설명         |
+|------------------|-----------|------------|
+| product_id (PK)  | INT       | 상품 고유 식별자  |
+| user_id (FK)     | INT         | 사용자 고유 식별자 (users 테이블 참조) |
+| name             | VARCHAR   | 상품명        |
+| description      | TEXT      | 상품 설명      |
+| price            | DECIMAL   | 상품 가격      |
+| stock            | INT       | 재고 수량      |
+| created_at       | TIMESTAMP | 생성일시       |
+| updated_at       | TIMESTAMP | 수정일시       |
 
 ### 3. 주문 테이블 (orders)
 
@@ -159,5 +160,6 @@
 - users (1:N) orders
 - users (1:N) payments
 - products (1:N) order_items
+- products (N:M) products
 - orders (1:N) order_items
 - orders (1:1) payments
