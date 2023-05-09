@@ -10,7 +10,7 @@ data class OrderEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    val orderId: Long,
+    val id: Long,
 
     val userId: Long,
     val status: String,
@@ -18,7 +18,7 @@ data class OrderEntity(
     val createdAt: LocalDateTime,
     val updatedAt: LocalDateTime,
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
     val orderItems: MutableList<OrderItemEntity> = mutableListOf(),
     val paymentId: Long?
 )
