@@ -1,8 +1,8 @@
-package com.tistory.kmmoon.order.adaptor.out.persistence
+package com.tistory.kmmoon.payment.adaptor.out.persistence
 
-import com.tistory.kmmoon.order.application.port.out.LoadOrderPort
-import com.tistory.kmmoon.order.application.port.out.UpdateOrderPort
+import com.tistory.kmmoon.payment.application.port.out.LoadPaymentPort
+import com.tistory.kmmoon.payment.application.port.out.UpdatePaymentPort
 
-class PaymentPersistenceAdapter: LoadOrderPort, UpdateOrderPort {
+class PaymentPersistenceAdapter: LoadPaymentPort, UpdatePaymentPort {
 
 }

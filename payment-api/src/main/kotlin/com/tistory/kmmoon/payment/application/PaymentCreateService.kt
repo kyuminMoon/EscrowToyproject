@@ -1,20 +1,20 @@
-package com.tistory.kmmoon.order.application
+package com.tistory.kmmoon.payment.application
 
-import com.tistory.kmmoon.order.application.port.`in`.OrderCreateUseCase
-import com.tistory.kmmoon.order.OrderEntity
-import com.tistory.kmmoon.order.infrastructure.OrderRepository
+import com.tistory.kmmoon.payment.PaymentEntity
+import com.tistory.kmmoon.payment.PaymentRepository
+import com.tistory.kmmoon.payment.application.port.`in`.PaymentCreateUseCase
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 @Component
-class PaymentCreateService: OrderCreateUseCase {
+class PaymentCreateService: PaymentCreateUseCase {
 
   @Autowired
-  lateinit var orderRepository: OrderRepository;
+  lateinit var paymentRepository: PaymentRepository;
 
 
-  fun findAll(): List<OrderEntity>? {
-    return orderRepository.findAllBy();
+  fun findAll(): List<PaymentEntity>? {
+    return paymentRepository.findAllBy();
   }
 
 }

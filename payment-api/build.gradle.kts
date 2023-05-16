@@ -24,12 +24,13 @@ apply<JibConfigPlugin>()
 dependencies {
     implementation(project(":payment-rds-entity"))
     implementation(project(":common"))
+    implementation(project(":core"))
 
     implementation(Dependencies.API)
     implementation(Dependencies.JPA)
     implementation(Dependencies.KAFKA)
     implementation(Dependencies.KAFKA_STREAM)
-    implementation(Dependencies.FEIGN)
-    implementation(Dependencies.REDIS)
+//    implementation(Dependencies.FEIGN)
+//    implementation(Dependencies.REDIS)
     kapt(Dependencies.JPA_KAPT)
 }

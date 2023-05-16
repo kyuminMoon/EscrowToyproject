@@ -1,7 +1,7 @@
-package com.tistory.kmmoon.order.domain.event
+package com.tistory.kmmoon.payment.adaptor.event.listener
 
-import com.tistory.kmmoon.order.application.PaymentCreateService
-import com.tistory.kmmoon.order.domain.OrderCreatedEvent
+import com.tistory.kmmoon.core.event.OrderCreatedEvent
+import com.tistory.kmmoon.payment.application.PaymentCreateService
 import org.springframework.kafka.annotation.KafkaListener
 import org.springframework.stereotype.Component
 
