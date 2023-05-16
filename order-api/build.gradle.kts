@@ -24,6 +24,7 @@ apply<JibConfigPlugin>()
 dependencies {
     implementation(project(":order-rds-entity"))
     implementation(project(":common"))
+    implementation(project(":core"))
 
     implementation(Dependencies.API)
     implementation(Dependencies.JPA)
