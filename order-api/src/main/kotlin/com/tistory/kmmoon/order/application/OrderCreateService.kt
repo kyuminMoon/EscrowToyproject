@@ -3,15 +3,12 @@ package com.tistory.kmmoon.order.application
 import com.tistory.kmmoon.order.application.port.`in`.OrderCreateUseCase
 import com.tistory.kmmoon.order.OrderEntity
 import com.tistory.kmmoon.order.infrastructure.OrderRepository
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.stereotype.Component
+import org.springframework.stereotype.Service
 
-@Component
-class OrderCreateService: OrderCreateUseCase {
-
-  @Autowired
-  lateinit var orderRepository: OrderRepository;
-
+@Service
+class OrderCreateService(
+  val orderRepository: OrderRepository
+) : OrderCreateUseCase {
 
   fun findAll(): List<OrderEntity>? {
     return orderRepository.findAllBy();
