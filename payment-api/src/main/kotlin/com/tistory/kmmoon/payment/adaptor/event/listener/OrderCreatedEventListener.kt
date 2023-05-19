@@ -6,7 +6,9 @@ import org.springframework.kafka.annotation.KafkaListener
 import org.springframework.stereotype.Component
 
 @Component
-class OrderCreatedEventListener(private val paymentService: PaymentCreateService) {
+class OrderCreatedEventListener(
+    val paymentService: PaymentCreateService
+) {
 
     @KafkaListener(topics = ["order_created_topic"], groupId = "payment_group")
     fun onOrderCreatedEvent(orderCreatedEvent: OrderCreatedEvent) {
