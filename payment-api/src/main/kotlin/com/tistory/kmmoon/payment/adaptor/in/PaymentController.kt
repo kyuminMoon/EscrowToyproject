@@ -4,9 +4,11 @@ import com.tistory.kmmoon.payment.PaymentEntity
 import com.tistory.kmmoon.payment.application.PaymentCreateService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
+@RequestMapping("/payments")
 class PaymentController (
   val paymentService: PaymentCreateService
 ) {
