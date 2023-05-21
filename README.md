@@ -163,3 +163,30 @@
 - products (N:M) products
 - orders (1:N) order_items
 - orders (1:1) payments
+
+
+# 포트원(아임포트) 개발자센터 주소
+https://developers.portone.io/docs/ko/readme
+
+![](.README_images/c7e31498.png)
+
+## 인증결제는 인증방법에 따라 전통적으로 아래 두가지 형태 구분
+- ISP 결제 : 공개키 기반의 전자인증서를 통해 사전에 등록된 카드정보를 인증하는 방식
+- MPI 결제 : 카드번호, CVC, 안심클릭 비밀번호를 입력하여 카드정보를 인증하는 방식
+
+## 에스크로 지원 PG사 목록
+- KG이니시스
+- NHN KCP
+- 페이조아(다우테이타)
+- 스마트로-신모듈
+
+## 포트원 API 목록
+https://developers.portone.io/docs/ko/api/api
+
+## 결제 화면 만들기
+https://developers.portone.io/docs/ko/auth/guide/1
+## 결제 결과 웹훅
+https://developers.portone.io/docs/ko/result/webhook
+ 
+## 결제 취소 화면 만들기
+https://developers.portone.io/docs/ko/auth/guide-2/readme
