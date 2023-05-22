@@ -190,3 +190,20 @@ https://developers.portone.io/docs/ko/result/webhook
  
 ## 결제 취소 화면 만들기
 https://developers.portone.io/docs/ko/auth/guide-2/readme
+
+
+
+### 필요 기능 정리
+* 참고 - https://everydayyy.tistory.com/89
+
+1. 프론트 - js 라이브러리 추가
+2. gradle 아임포트 SDK 추가
+3. 백엔드 - 검증 API 호출 (프론트에서 값 전달 : /verifyIamport/{imp_uid})
+4. 백엔드 - 배송정보 유효성 검증
+5. 백엔드 - 결제 성공시에 작동하는 주문 비즈니스 로직
+6. 백엔드 이벤트 - 결제 성공
+   배송객체 생성
+   주문객체 생성, delivery와 매핑
+   주문아이템 객체 생성, order와 매핑
+   장바구니사용자라면 구매한 장바구니 객체 삭제
+7. 
