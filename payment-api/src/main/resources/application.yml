@@ -45,6 +45,6 @@ logging:
 
 # 아임웹 -> 포트원으로 이름 변경
 portone:
-  pg-mall-id:
-  secret-key:
-  client-key:
+  pg-mall-id: a
+  secret-key: b
+  client-key: c

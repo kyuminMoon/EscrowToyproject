@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service
 
 @Service
 class PaymentCreateService (
-  val paymentRepository: PaymentRepository
+  var paymentRepository: PaymentRepository
 ) : PaymentCreateUseCase {
 
   fun findAll(): List<PaymentEntity>? {

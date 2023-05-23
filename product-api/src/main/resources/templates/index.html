@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<!-- 결제하기 버튼 생성 -->
+<button onclick="requestPay()">결제하기</button>
+
+<script type="text/javascript" src="https://cdn.iamport.kr/v1/iamport.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+
+<script>
+    var IMP = window.IMP;
+    IMP.init("impXXXXXXXXX");
+
+    function requestPay() {
+        IMP.request_pay(
+            {
+                pg: "kcp.{상점ID}",
+                pay_method: "card",
+                merchant_uid: "57008833-33004",
+                name: "당근 10kg",
+                amount: 1004,
+                buyer_email: "Iamport@chai.finance",
+                buyer_name: "포트원 기술지원팀",
+                buyer_tel: "010-1234-5678",
+                buyer_addr: "서울특별시 강남구 삼성동",
+                buyer_postcode: "123-456",
+            },
+            function (rsp) {
+                // callback
+                //rsp.imp_uid 값으로 결제 단건조회 API를 호출하여 결제결과를 판단합니다.
+            }
+        );
+    }
+
+
+
+    // function iamport(){
+    //
+    //     var flag = $("#flag").val();
+    //     var principalId = $("#principalId").val();
+    //     var name = $("#name").val();
+    //     var phone = $("#phone").val();
+    //     var email = $("#email").val();
+    //     var postcode = $("#postcode").val();
+    //     var address = $("#address").val() + " " + $("#detailAddress").val();
+    //
+    //     var productName;
+    //     var productId = $("#productId").val();
+    //     var detailName = $("#productName").val();
+    //     var cartName = $("#cartName").val();
+    //     var amount = $("#amount").val();
+    //     var price = $("#total-price").text();
+    //
+    //
+    //     //가맹점 식별코드
+    //     IMP.init("imp20807674");
+    //     IMP.request_pay({
+    //         pg : 'kcp',
+    //         pay_method : 'card',
+    //         merchant_uid : 'merchant_' + new Date().getTime(),
+    //         name : productName,
+    //         amount : price,
+    //         buyer_email : email,
+    //         buyer_name : name,
+    //         buyer_tel : phone,
+    //         buyer_addr : address,
+    //         buyer_postcode : postcode
+    //     }, function(res) {
+    //
+    //         // 결제검증
+    //         $.ajax({
+    //             type : "POST",
+    //             url : "/verifyIamport/" + res.imp_uid
+    //         }).done(function(data) {
+    //
+    //             if(res.paid_amount == data.response.amount){
+    //                 alert("결제 및 결제검증완료");
+    //
+    //                 //결제 성공 시 비즈니스 로직
+    //
+    //             } else {
+    //                 alert("결제 실패");
+    //             }
+    //         });
+    //     });
+
+
+
+
+
+        // var IMP = window.IMP;
+        // IMP.init("impXXXXXXXXX");
+        //
+        // function requestPay() {
+        //     IMP.request_pay(
+        //         {
+        //             pg: "kcp.{상점ID}",
+        //             pay_method: "card",
+        //             merchant_uid: "57008833-33004",
+        //             name: "당근 10kg",
+        //             amount: 1004,
+        //             buyer_email: "Iamport@chai.finance",
+        //             buyer_name: "포트원 기술지원팀",
+        //             buyer_tel: "010-1234-5678",
+        //             buyer_addr: "서울특별시 강남구 삼성동",
+        //             buyer_postcode: "123-456",
+        //         },
+        //         function (rsp) {
+        //             // callback
+        //             //rsp.imp_uid 값으로 결제 단건조회 API를 호출하여 결제결과를 판단합니다.
+        //         }
+        //     );
+        // }
+    // }
+
+</script>
+</body>
+</html>

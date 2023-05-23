@@ -28,8 +28,8 @@ dependencies {
 
     implementation(Dependencies.API)
     implementation(Dependencies.JPA)
-    implementation(Dependencies.KAFKA)
-    implementation(Dependencies.KAFKA_STREAM)
+//    implementation(Dependencies.KAFKA)
+//    implementation(Dependencies.KAFKA_STREAM)
 //    implementation(Dependencies.FEIGN)
 //    implementation(Dependencies.REDIS)
     kapt(Dependencies.JPA_KAPT)
