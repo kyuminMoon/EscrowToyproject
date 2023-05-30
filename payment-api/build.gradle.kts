@@ -25,7 +25,7 @@ dependencies {
     implementation(project(":payment-rds-entity"))
     implementation(project(":common"))
     implementation(project(":core"))
-
+    implementation("com.github.iamport:iamport-rest-client-java:0.2.22")
     implementation(Dependencies.API)
     implementation(Dependencies.JPA)
 //    implementation(Dependencies.KAFKA)

@@ -42,6 +42,7 @@ allprojects {
         maven(url = "https://repo.spring.io/snapshot")
         maven(url = "https://repo.spring.io/milestone")
         maven(url = "https://packages.confluent.io/maven/")
+        maven(url = "https://jitpack.io")
     }
 
     tasks.withType<Test> {
