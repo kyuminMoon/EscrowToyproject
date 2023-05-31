@@ -223,6 +223,31 @@ https://developers.portone.io/docs/ko/auth/guide-2/readme
 
 ### 필요 기능 정리
 
+#### 내부 API 목록
+고려할 사항 상품 배송비 재고 등등...
+포인트, 쿠폰 등은 일정상 가능하다면 추가
+
+* [ ] 회원 가입 - **POST /auth/signup**
+* [ ] 로그인 - **POST /auth/login**
+ 
+* [ ] 상품 등록 - **POST /products**
+* [ ] 상품 수정 - **PUT /products/{productId}**
+* [ ] 상품 조회 - **GET /products**
+ 
+* [ ] 주문 생성 (배송완료까지) - **POST /orders**
+* [ ] 주문 확정 - **POST /orders/{orderId}/confirm**
+* [ ] 주문 취소 - **DELETE /orders/{orderId}/cancel**
+* [ ] 에스크로 결제 요청 - **POST /payments**
+
+[//]: # (* [ ] 에스크로 결제 확인 - **GET /payments/{paymentId}/status**)
+[//]: # (* [ ] 에스크로 결제 승인 - **POST /payments/{paymentId}/confirm**)
+ 
+* [ ] 에스크로 환불 - **POST /payments/{paymentId}/refund**
+* [ ] 에스크로 취소 - **POST /payments/{paymentId}/cancel**
+
+
+
+#### 아임포트 관련
 * 참고 - https://everydayyy.tistory.com/89
 
 * ![](.README_images/ed746297.png)
@@ -238,6 +263,4 @@ https://developers.portone.io/docs/ko/auth/guide-2/readme
   주문아이템 객체 생성, order와 매핑</br>
   장바구니사용자라면 구매한 장바구니 객체 삭제
 * [ ]  배송완료 이벤트 발행
-* [ ]  에스크로 배송 완료 후 n일 || 주문 확정 / 주문 교환,취소</br>
-  완료 시 - 주문 완료</br>
-  교환취소 시 - 주문 교환,취소리
+* [ ]  에스크로 배송 완료 후 n일 || 주문 확정 / 주문 교환,취소 ? 입금 : return
