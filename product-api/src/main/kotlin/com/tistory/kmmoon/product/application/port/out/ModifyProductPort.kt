@@ -1,3 +1,7 @@
 package com.tistory.kmmoon.product.application.port.out
 
-interface ModifyProductPort
+import com.tistory.kmmoon.product.ProductEntity
+
+interface ModifyProductPort {
+    fun modify(productModifyRequest: ProductEntity): ProductEntity
+}

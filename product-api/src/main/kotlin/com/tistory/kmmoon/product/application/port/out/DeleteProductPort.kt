@@ -1,3 +1,5 @@
 package com.tistory.kmmoon.product.application.port.out
 
-interface DeleteProductPort
+interface DeleteProductPort {
+    fun delete(productId: Long)
+}
