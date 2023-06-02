@@ -5,7 +5,7 @@ import java.time.LocalDateTime
 
 data class ProductCreateRequest(
   val id: Long,
-  val userId: Long,
+  var userId: Long,
   val name: String,
   val description: String,
   val price: BigDecimal,

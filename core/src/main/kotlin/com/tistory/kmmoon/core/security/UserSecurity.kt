@@ -13,6 +13,10 @@ class UserSecurity(private val users: UserEntity) : UserDetails {
             .toList()
     }
 
+    fun getUserId(): Long {
+        return users.id!!
+    }
+
     override fun getPassword(): String {
         return users.password
     }

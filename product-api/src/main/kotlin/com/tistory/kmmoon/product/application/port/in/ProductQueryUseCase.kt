@@ -9,5 +9,5 @@ interface ProductQueryUseCase {
   fun findProductInfo(id: Long): Product?
   fun create(productCreateRequest: ProductCreateRequest): Product?
   fun modify(productModifyRequest: ProductModifyRequest): Product?
-  fun delete(productId: Long)
+  fun delete(productId: Long, userId: Long)
 }

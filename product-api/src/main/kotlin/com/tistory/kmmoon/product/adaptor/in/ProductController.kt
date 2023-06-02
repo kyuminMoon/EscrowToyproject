@@ -1,10 +1,12 @@
 package com.tistory.kmmoon.product.adaptor.`in`
 
+import com.tistory.kmmoon.core.security.UserSecurity
 import com.tistory.kmmoon.product.application.port.`in`.ProductQueryUseCase
 import com.tistory.kmmoon.product.domain.Product
 import com.tistory.kmmoon.product.domain.request.ProductCreateRequest
 import com.tistory.kmmoon.product.domain.request.ProductModifyRequest
 import org.springframework.http.ResponseEntity
+import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -27,23 +29,25 @@ class ProductController(
   }
 
   @PostMapping
-  fun create(productCreateRequest: ProductCreateRequest): ResponseEntity<Product> {
+  fun create(@AuthenticationPrincipal userSecurity: UserSecurity, productCreateRequest: ProductCreateRequest): ResponseEntity<Product> {
+    productCreateRequest.userId = userSecurity.getUserId()
     return ResponseEntity
       .ok()
       .body(productQueryUseCase.create(productCreateRequest))
   }
 
   @PutMapping("/{productId}")
-  fun modify(@PathVariable productId: Long, productModifyRequest: ProductModifyRequest): ResponseEntity<Product> {
+  fun modify(@AuthenticationPrincipal userSecurity: UserSecurity, @PathVariable productId: Long, productModifyRequest: ProductModifyRequest): ResponseEntity<Product> {
     productModifyRequest.id = productId
+    productModifyRequest.userId = userSecurity.getUserId()
     return ResponseEntity
       .ok()
       .body(productQueryUseCase.modify(productModifyRequest))
   }
 
   @DeleteMapping("/{productId}")
-  fun modify(@PathVariable productId: Long): ResponseEntity<Void> {
-    productQueryUseCase.delete(productId)
+  fun modify(@AuthenticationPrincipal userSecurity: UserSecurity, @PathVariable productId: Long): ResponseEntity<Void> {
+    productQueryUseCase.delete(productId, userSecurity.getUserId())
     return ResponseEntity
       .ok().build()
 

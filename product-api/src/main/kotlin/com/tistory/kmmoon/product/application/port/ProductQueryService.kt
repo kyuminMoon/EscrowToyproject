@@ -38,7 +38,7 @@ class ProductQueryService (
     return mapper.toData(modifyProductPort.modify(entity))
   }
 
-  override fun delete(productId: Long) {
+  override fun delete(productId: Long, userId: Long) {
     deleteProductPort.delete(productId)
   }
 
