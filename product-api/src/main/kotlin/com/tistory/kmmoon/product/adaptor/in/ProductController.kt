@@ -46,7 +46,7 @@ class ProductController(
   }
 
   @DeleteMapping("/{productId}")
-  fun modify(@AuthenticationPrincipal userSecurity: UserSecurity, @PathVariable productId: Long): ResponseEntity<Void> {
+  fun delete(@AuthenticationPrincipal userSecurity: UserSecurity, @PathVariable productId: Long): ResponseEntity<Void> {
     productQueryUseCase.delete(productId, userSecurity.getUserId())
     return ResponseEntity
       .ok().build()
