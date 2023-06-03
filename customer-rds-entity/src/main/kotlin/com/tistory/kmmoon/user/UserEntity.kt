@@ -22,7 +22,8 @@ data class UserEntity(
   @JoinTable(
     name = "authorities",
     joinColumns = [ JoinColumn(name = "user_id") ],
-    inverseJoinColumns = [ JoinColumn(name = "authority_id") ]
+    inverseJoinColumns = [ JoinColumn(name = "authority_id") ],
+    foreignKey = ForeignKey(ConstraintMode.NO_CONSTRAINT)
   )
   var authorities: Set<Authority>,
 
