@@ -11,10 +11,11 @@ data class ProductEntity(
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false)
   val id: Long,
-  val userId: Long,
+  var userId: Long,
   val name: String,
   val description: String,
   val price: BigDecimal,
+  val active: Boolean = true,
   val createdAt: LocalDateTime,
   val updatedAt: LocalDateTime,
 )

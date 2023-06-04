@@ -12,11 +12,12 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/user/products")
 class ProductController(
   var productQueryUseCase: ProductQueryUseCase
 ) {
@@ -29,15 +30,14 @@ class ProductController(
   }
 
   @PostMapping
-  fun create(@AuthenticationPrincipal userSecurity: UserSecurity, productCreateRequest: ProductCreateRequest): ResponseEntity<Product> {
-    productCreateRequest.userId = userSecurity.getUserId()
+  fun create(@AuthenticationPrincipal userSecurity: UserSecurity, @RequestBody productCreateRequest: ProductCreateRequest): ResponseEntity<Product> {
     return ResponseEntity
       .ok()
-      .body(productQueryUseCase.create(productCreateRequest))
+      .body(productQueryUseCase.create(userSecurity.getUserId(), productCreateRequest))
   }
 
   @PutMapping("/{productId}")
-  fun modify(@AuthenticationPrincipal userSecurity: UserSecurity, @PathVariable productId: Long, productModifyRequest: ProductModifyRequest): ResponseEntity<Product> {
+  fun modify(@AuthenticationPrincipal userSecurity: UserSecurity, @PathVariable productId: Long, @RequestBody productModifyRequest: ProductModifyRequest): ResponseEntity<Product> {
     productModifyRequest.id = productId
     productModifyRequest.userId = userSecurity.getUserId()
     return ResponseEntity

@@ -51,8 +51,10 @@ class DatabaseCleanup: InitializingBean {
     entityManager.createNativeQuery("SET REFERENTIAL_INTEGRITY FALSE").executeUpdate()
 
     for(tableName in tableNames) {
-      entityManager.createNativeQuery("TRUNCATE TABLE " + tableName).executeUpdate()
-      entityManager.createNativeQuery("ALTER TABLE " + tableName + " ALTER COLUMN ID RESTART WITH 1").executeUpdate()
+      if(tableName != "authority") {
+        entityManager.createNativeQuery("TRUNCATE TABLE " + tableName).executeUpdate()
+        entityManager.createNativeQuery("ALTER TABLE " + tableName + " ALTER COLUMN ID RESTART WITH 1").executeUpdate()
+      }
     }
 
       entityManager.createNativeQuery("SET REFERENTIAL_INTEGRITY TRUE").executeUpdate()

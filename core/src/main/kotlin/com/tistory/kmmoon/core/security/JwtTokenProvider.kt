@@ -21,7 +21,12 @@ import java.util.stream.Collectors
 // 토큰 생성, 검증
 //@Configurable
 @Component
-class JwtTokenProvider(@Value("\${jwt.secret}") secret: String, @Value("\${jwt.access-token-validity-in-seconds}") tokenValidityInSeconds: Long, @Value("\${jwt.refresh-token-validity-in-seconds}") refreshTokenValidityInSeconds: Long) {
+class JwtTokenProvider(
+  var userDetailsService: CustomUserDetailsService,
+  @Value("\${jwt.secret}") secret: String,
+  @Value("\${jwt.access-token-validity-in-seconds}") tokenValidityInSeconds: Long,
+  @Value("\${jwt.refresh-token-validity-in-seconds}") refreshTokenValidityInSeconds: Long
+) {
 
   val log: Logger = LoggerFactory.getLogger(JwtTokenProvider::class.java)
   final val accessTokenValidityInMilliseconds: Long
@@ -82,14 +87,19 @@ class JwtTokenProvider(@Value("\${jwt.secret}") secret: String, @Value("\${jwt.a
       .collect(Collectors.toList())
 
     // 디비를 거치지 않고 토큰에서 값을 꺼내 바로 시큐리티 유저 객체를 만들어 Authentication을 만들어 반환하기에 유저네임, 권한 외 정보는 알 수 없다.
-    val principal = User(claims.subject, "", authorities)
-    return UsernamePasswordAuthenticationToken(principal, token, authorities)
+//    val principal = User(claims.subject, "", authorities)
+    val userSecurity = userDetailsService.loadUserByUsername(claims.subject)
+    return UsernamePasswordAuthenticationToken(userSecurity, token, authorities)
   }
 
   // 토큰 유효성 검사
   fun validateAccessToken(token: String?): Boolean {
     try {
-      val claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).body
+      val claims = Jwts.parserBuilder()
+        .setSigningKey(key)
+        .build()
+        .parseClaimsJws(token)
+        .body
       val tokenType = claims.get("token_type")
 
       if (tokenType != null) {

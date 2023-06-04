@@ -13,11 +13,11 @@ spring:
     open-in-view: false
     show-sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     generate-ddl: true
     properties:
       hibernate:
-        hdm2ddl.auto: create
+        hdm2ddl.auto: update
         format_sql: true
 
   output:

@@ -1,6 +1,6 @@
 package com.tistory.kmmoon.user
 
-import com.tistory.kmmoon.config.DatabaseCleanupBefore
+import com.tistory.kmmoon.common.DatabaseCleanupBefore
 import com.tistory.kmmoon.user.application.UserCommandService
 import com.tistory.kmmoon.user.application.UserQueryService
 import com.tistory.kmmoon.user.domain.request.UserCreateRequest
@@ -10,14 +10,10 @@ import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 
 
-internal class UserServiceTest : DatabaseCleanupBefore() {
-
-  @Autowired
-  lateinit var userCommandService: UserCommandService
-
-  @Autowired
-  lateinit var userQueryService: UserQueryService
-
+internal class UserServiceTest(
+  val userCommandService: UserCommandService,
+  val userQueryService: UserQueryService
+) : DatabaseCleanupBefore() {
 
   var request = UserCreateRequest(
     password = "password",

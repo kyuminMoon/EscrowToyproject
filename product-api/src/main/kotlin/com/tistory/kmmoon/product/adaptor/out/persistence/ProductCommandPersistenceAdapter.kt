@@ -17,7 +17,7 @@ class ProductCommandPersistenceAdapter(
   }
 
   override fun modify(entity: ProductEntity): ProductEntity {
-    return productRepository.updateByUserId(entity)
+    return productRepository.save(entity)
   }
 
   override fun delete(productId: Long) {

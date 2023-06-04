@@ -1,7 +1,7 @@
 package com.tistory.kmmoon.auth
 
 import com.tistory.kmmoon.auth.application.port.AccountService
-import com.tistory.kmmoon.config.DatabaseCleanupBefore
+import com.tistory.kmmoon.common.DatabaseCleanupBefore
 import com.tistory.kmmoon.core.security.JwtTokenProvider
 import com.tistory.kmmoon.user.domain.request.UserCreateRequest
 import org.assertj.core.api.Assertions.assertThat

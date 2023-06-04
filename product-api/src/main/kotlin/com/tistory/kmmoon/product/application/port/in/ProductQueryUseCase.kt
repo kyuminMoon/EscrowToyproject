@@ -7,7 +7,7 @@ import com.tistory.kmmoon.product.domain.request.ProductModifyRequest
 interface ProductQueryUseCase {
   fun findAll(): List<Product>?
   fun findProductInfo(id: Long): Product?
-  fun create(productCreateRequest: ProductCreateRequest): Product?
+  fun create(userId: Long, productCreateRequest: ProductCreateRequest): Product?
   fun modify(productModifyRequest: ProductModifyRequest): Product?
   fun delete(productId: Long, userId: Long)
 }

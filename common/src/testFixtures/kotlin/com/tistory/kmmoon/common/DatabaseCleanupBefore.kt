@@ -1,6 +1,5 @@
-package com.tistory.kmmoon.config
+package com.tistory.kmmoon.common
 
-import com.tistory.kmmoon.common.DatabaseCleanup
 import io.restassured.RestAssured
 import org.junit.jupiter.api.BeforeEach
 import org.springframework.beans.factory.annotation.Autowired

@@ -13,11 +13,11 @@ import org.springframework.stereotype.Component
 
 @Component
 class ProductQueryService (
-  var queryProductPort: QueryProductPort,
-  var createProductPort: CreateProductPort,
-  var modifyProductPort: ModifyProductPort,
-  var deleteProductPort: DeleteProductPort,
-  var mapper: ProductMapper
+  val queryProductPort: QueryProductPort,
+  val createProductPort: CreateProductPort,
+  val modifyProductPort: ModifyProductPort,
+  val deleteProductPort: DeleteProductPort,
+  val mapper: ProductMapper
 ): ProductQueryUseCase {
 
   override fun findAll(): List<Product>? {
@@ -28,12 +28,16 @@ class ProductQueryService (
     return mapper.toData(queryProductPort.findById(id))
   }
 
-  override fun create(productCreateRequest: ProductCreateRequest): Product? {
+  override fun create(userId: Long, productCreateRequest: ProductCreateRequest): Product? {
     val entity = mapper.createEntity(productCreateRequest)
+    entity.userId = userId
     return mapper.toData(createProductPort.create(entity))
   }
 
   override fun modify(productModifyRequest: ProductModifyRequest): Product? {
+    val findById = queryProductPort.findById(productModifyRequest.id) ?: throw Exception()
+    if(findById.userId != productModifyRequest.userId)
+      throw Exception()
     val entity = mapper.modifyEntity(productModifyRequest)
     return mapper.toData(modifyProductPort.modify(entity))
   }
