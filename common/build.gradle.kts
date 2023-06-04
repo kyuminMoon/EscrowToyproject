@@ -25,5 +25,8 @@ dependencies {
     testFixturesImplementation("jakarta.persistence:jakarta.persistence-api")
     testFixturesImplementation("jakarta.annotation:jakarta.annotation-api")//    testFixtures(Dependencies.COMMON)
     testFixturesImplementation("org.springframework.boot:spring-boot-starter-web")//    testFixtures(Dependencies.COMMON)
-
+    testFixturesImplementation("org.jetbrains.kotlin:kotlin-test")
+    testFixturesImplementation("org.springframework.boot:spring-boot-starter-test")
+    testFixturesImplementation("org.springframework.security:spring-security-test")
+    testFixturesImplementation("io.rest-assured:rest-assured")
 }

@@ -33,4 +33,9 @@ dependencies {
 //    implementation(Dependencies.FEIGN)
 //    implementation(Dependencies.REDIS)
     kapt(Dependencies.JPA_KAPT)
+
+    testImplementation(Dependencies.TEST)
+    testImplementation(project(":core"))
+    testImplementation(testFixtures(project(":common")))
+    testRuntimeOnly("com.h2database:h2")
 }
