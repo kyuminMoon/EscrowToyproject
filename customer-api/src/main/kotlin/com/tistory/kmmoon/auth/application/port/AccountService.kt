@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.core.GrantedAuthority
+import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
@@ -49,7 +50,9 @@ class AccountService(
     if(!passwordEncoder.matches(password, userEntity.password))
       throw UserGuideException(ErrorMessage.LOGIN_FAILED)
 
-    return authLoginResponse(email, password, UserSecurity(userEntity).authorities)
+    return authLoginResponse(email, password, UserSecurity(userEntity.id!!, userEntity.email, userEntity.password, userEntity.authorities.stream()
+      .map { auth: Authority -> SimpleGrantedAuthority(auth.authorityName.name) }
+      .toList()).getAuthorities())
   }
   @Throws(UserGuideException::class)
   override fun signUp(request: UserCreateRequest): AuthLoginResponse? {
@@ -74,7 +77,9 @@ class AccountService(
 
     val signup = signupPort.signup(userEntity)
 
-    return authLoginResponse(request.email, request.password, UserSecurity(userEntity).authorities)
+    return authLoginResponse(request.email, request.password, UserSecurity(userEntity.id!!, userEntity.email, userEntity.password, userEntity.authorities.stream()
+      .map { auth: Authority -> SimpleGrantedAuthority(auth.authorityName.name) }
+      .toList()).getAuthorities())
   }
 
 

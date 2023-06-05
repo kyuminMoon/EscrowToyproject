@@ -12,7 +12,7 @@ class UserCommandPersistenceAdapter(
   var userRepository: UserRepository
 ): CreateUserPort, ModifyUserPort, DeleteUserPort {
   override fun create(userEntity: UserEntity): UserEntity {
-    return userRepository.save(userEntity);
+    return userRepository.save(userEntity)
   }
 
   override fun existsEmail(email: String): Boolean {

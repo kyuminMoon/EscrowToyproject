@@ -12,6 +12,7 @@ import org.mapstruct.ReportingPolicy
 interface ProductMapper {
 
   @Mapping(target = "id", ignore = true)
+  @Mapping(target = "active", expression = "java(true)")
   fun createEntity(request: ProductCreateRequest): ProductEntity
 
   fun modifyEntity(request: ProductModifyRequest): ProductEntity

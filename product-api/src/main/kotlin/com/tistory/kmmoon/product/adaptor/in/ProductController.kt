@@ -33,13 +33,13 @@ class ProductController(
   fun create(@AuthenticationPrincipal userSecurity: UserSecurity, @RequestBody productCreateRequest: ProductCreateRequest): ResponseEntity<Product> {
     return ResponseEntity
       .ok()
-      .body(productQueryUseCase.create(userSecurity.getUserId(), productCreateRequest))
+      .body(productQueryUseCase.create(userSecurity.getId(), productCreateRequest))
   }
 
   @PutMapping("/{productId}")
   fun modify(@AuthenticationPrincipal userSecurity: UserSecurity, @PathVariable productId: Long, @RequestBody productModifyRequest: ProductModifyRequest): ResponseEntity<Product> {
     productModifyRequest.id = productId
-    productModifyRequest.userId = userSecurity.getUserId()
+    productModifyRequest.userId = userSecurity.getId()
     return ResponseEntity
       .ok()
       .body(productQueryUseCase.modify(productModifyRequest))
@@ -47,7 +47,7 @@ class ProductController(
 
   @DeleteMapping("/{productId}")
   fun delete(@AuthenticationPrincipal userSecurity: UserSecurity, @PathVariable productId: Long): ResponseEntity<Void> {
-    productQueryUseCase.delete(productId, userSecurity.getUserId())
+    productQueryUseCase.delete(productId, userSecurity.getId())
     return ResponseEntity
       .ok().build()
 

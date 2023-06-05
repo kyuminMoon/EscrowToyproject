@@ -1,32 +1,31 @@
 package com.tistory.kmmoon.core.security
 
 import com.tistory.kmmoon.user.Authority
-import com.tistory.kmmoon.user.UserEntity
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
-import java.util.*
 
 class UserSecurity(
-    val user: UserEntity,
+    private val id : Long,
+    private val email: String,
+    private val password: String,
+    private val authorities: Collection<GrantedAuthority?>,
 ) : UserDetails {
 
     override fun getAuthorities(): Collection<GrantedAuthority?> {
-        return user.authorities.stream()
-            .map { auth: Authority -> SimpleGrantedAuthority(auth.authorityName.name) }
-            .toList()
+        return authorities
     }
 
-    fun getUserId(): Long {
-        return user.id!!
+    fun getId(): Long {
+        return id
     }
 
     override fun getPassword(): String {
-        return user.password
+        return password
     }
 
     override fun getUsername(): String {
-        return user.email
+        return email
     }
 
     override fun isAccountNonExpired(): Boolean {
