@@ -1,3 +1,8 @@
 package com.tistory.kmmoon.product.application.port.`in`
 
-interface ProductModifyUseCase
+import com.tistory.kmmoon.product.domain.Product
+import com.tistory.kmmoon.product.domain.request.ProductModifyRequest
+
+interface ProductModifyUseCase {
+    fun modify(productModifyRequest: ProductModifyRequest): Product
+}

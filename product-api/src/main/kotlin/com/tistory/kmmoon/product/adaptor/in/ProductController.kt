@@ -1,6 +1,9 @@
 package com.tistory.kmmoon.product.adaptor.`in`
 
 import com.tistory.kmmoon.core.security.UserSecurity
+import com.tistory.kmmoon.product.application.port.`in`.ProductCreateUseCase
+import com.tistory.kmmoon.product.application.port.`in`.ProductDeleteUseCase
+import com.tistory.kmmoon.product.application.port.`in`.ProductModifyUseCase
 import com.tistory.kmmoon.product.application.port.`in`.ProductQueryUseCase
 import com.tistory.kmmoon.product.domain.Product
 import com.tistory.kmmoon.product.domain.request.ProductCreateRequest
@@ -19,7 +22,10 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/user/products")
 class ProductController(
-  var productQueryUseCase: ProductQueryUseCase
+  var productQueryUseCase: ProductQueryUseCase,
+  var productCreateUseCase: ProductCreateUseCase,
+  var productModifyUseCase: ProductModifyUseCase,
+  var productDeleteUseCase: ProductDeleteUseCase
 ) {
 
   @GetMapping("/all")
@@ -33,7 +39,7 @@ class ProductController(
   fun create(@AuthenticationPrincipal userSecurity: UserSecurity, @RequestBody productCreateRequest: ProductCreateRequest): ResponseEntity<Product> {
     return ResponseEntity
       .ok()
-      .body(productQueryUseCase.create(userSecurity.getId(), productCreateRequest))
+      .body(productCreateUseCase.create(userSecurity.getId(), productCreateRequest))
   }
 
   @PutMapping("/{productId}")
@@ -42,14 +48,13 @@ class ProductController(
     productModifyRequest.userId = userSecurity.getId()
     return ResponseEntity
       .ok()
-      .body(productQueryUseCase.modify(productModifyRequest))
+      .body(productModifyUseCase.modify(productModifyRequest))
   }
 
   @DeleteMapping("/{productId}")
   fun delete(@AuthenticationPrincipal userSecurity: UserSecurity, @PathVariable productId: Long): ResponseEntity<Void> {
-    productQueryUseCase.delete(productId, userSecurity.getId())
+    productDeleteUseCase.delete(productId, userSecurity.getId())
     return ResponseEntity
       .ok().build()
-
   }
 }
