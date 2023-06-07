@@ -1,9 +1,9 @@
 package com.tistory.kmmoon.product.application.port.out
 
+import com.tistory.kmmoon.product.InventoryEntity
 import com.tistory.kmmoon.product.application.port.`in`.ProductCreateUseCase
 import com.tistory.kmmoon.product.application.port.`in`.ProductDeleteUseCase
 import com.tistory.kmmoon.product.application.port.`in`.ProductModifyUseCase
-import com.tistory.kmmoon.product.application.port.`in`.ProductQueryUseCase
 import com.tistory.kmmoon.product.domain.Product
 import com.tistory.kmmoon.product.domain.mapper.ProductMapper
 import com.tistory.kmmoon.product.domain.request.ProductCreateRequest
@@ -16,12 +16,19 @@ class CommandProductService (
   val createProductPort: CreateProductPort,
   val modifyProductPort: ModifyProductPort,
   val deleteProductPort: DeleteProductPort,
+  val createInventoryPort: CreateInventoryPort,
   val mapper: ProductMapper
 ): ProductCreateUseCase, ProductModifyUseCase, ProductDeleteUseCase {
   override fun create(userId: Long, productCreateRequest: ProductCreateRequest): Product {
-    val entity = mapper.createEntity(productCreateRequest)
-    entity.userId = userId
-    return mapper.toData(createProductPort.create(entity))
+    val inventoryEntity = createInventoryPort.create(InventoryEntity(
+      quantity = productCreateRequest.quantity,
+    ))
+
+    val productEntity = mapper.createEntity(productCreateRequest)
+    productEntity.userId = userId
+    
+    productEntity.inventory = inventoryEntity
+    return mapper.toData(createProductPort.create(productEntity))
   }
 
   override fun modify(productModifyRequest: ProductModifyRequest): Product {
