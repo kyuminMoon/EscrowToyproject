@@ -17,6 +17,8 @@ interface ProductMapper {
 
   fun modifyEntity(request: ProductModifyRequest): ProductEntity
 
+  @Mapping(target = "productId", source = "id")
+  @Mapping(target = "quantity", source = "inventory.quantity")
   fun toData(entity: ProductEntity?): Product
 
   fun toData(findAllBy: List<ProductEntity>?): List<Product>?

@@ -9,7 +9,7 @@ data class Product(
   val name: String,
   val description: String,
   val price: BigDecimal,
-  val stock: Int,
+  val quantity: Int,
   val createdAt: LocalDateTime,
   val updatedAt: LocalDateTime,
 )
