@@ -1,16 +1,22 @@
 package com.tistory.kmmoon.product.adaptor.`in`
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.navercorp.fixturemonkey.FixtureMonkey
+import com.navercorp.fixturemonkey.kotlin.KotlinPlugin
 import com.tistory.kmmoon.common.DatabaseCleanupBefore
 import com.tistory.kmmoon.common.UserRole
 import com.tistory.kmmoon.core.security.UserSecurity
 import com.tistory.kmmoon.product.domain.request.ProductCreateRequest
+import net.jqwik.api.Arbitraries
+import org.assertj.core.api.BDDAssertions.then
+import org.hamcrest.Matchers
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
+import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.authority.SimpleGrantedAuthority
@@ -19,8 +25,11 @@ import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequ
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers.*
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
 import java.math.BigDecimal
+import java.time.Instant
 import java.util.*
+
 
 /**
 * XXX : kotlin 코드로 mockmvc를 사용할 경우 Security에 버그가 있어 일부 기능이 사용 불가능하다고 한다.
@@ -48,12 +57,6 @@ class ProductControllerTest(
         SecurityContextHolder.getContext().authentication = authenticationToken
     }
 
-    val createProductRequest = ProductCreateRequest(
-        name = "상품명_1",
-        description = "상품설명_1",
-        price = BigDecimal(5000),
-        quantity = 5
-    )
 
     /**
      * 상품 생성 시, 재고 테이블도 생성
@@ -61,16 +64,36 @@ class ProductControllerTest(
     @Test
     @DisplayName("상품 생성")
     fun create() {
-        val content: String = objectMapper.writeValueAsString(createProductRequest)
 
-        val perform = mvc.perform(
+        val sut: FixtureMonkey = FixtureMonkey.builder()
+            .plugin(KotlinPlugin())
+            .build()
+
+        val actual: ProductCreateRequest = sut.giveMeBuilder(ProductCreateRequest::class.java)
+            .set("name", Arbitraries.strings().ofMinLength(2).ofMaxLength(50).ascii())
+            .set("description", Arbitraries.strings().ofMinLength(2).ofMaxLength(1000).ascii())
+            .set("price", Arbitraries.integers().between(100, 100_000_000))
+            .set("quantity", Arbitraries.integers().between(1, 10_000))
+            .sample()
+        then(actual.name.length).isBetween(2, 50)
+        then(actual.description.length).isBetween(2,1000)
+        then(actual.quantity).isBetween(1, 10_000) // @Min(1) @Max(100)
+        then(actual.price).isBetween(100, 100_000_000) // @Min(0)
+
+        val content: String = objectMapper.writeValueAsString(actual)
+
+        mvc.perform(
             post("/user/products").with(csrf())
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(content)
         ).andDo(print())
-
-
+            .andExpectAll(
+                status().isOk(),
+                header().string(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE),
+                jsonPath("success").value(Matchers.`is`(true)),
+                jsonPath("data").exists()
+            )
     }
 
     /**

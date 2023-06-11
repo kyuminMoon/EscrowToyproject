@@ -39,3 +39,4 @@ dependencies {
     testImplementation(testFixtures(project(":common")))
     testRuntimeOnly("com.h2database:h2")
 }
+

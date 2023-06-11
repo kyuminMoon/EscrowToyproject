@@ -1,5 +1,6 @@
 package com.tistory.kmmoon.product.application.port.out
 
+import com.tistory.kmmoon.core.exception.CommonResponse
 import com.tistory.kmmoon.product.InventoryEntity
 import com.tistory.kmmoon.product.application.port.`in`.ProductCreateUseCase
 import com.tistory.kmmoon.product.application.port.`in`.ProductDeleteUseCase
@@ -19,7 +20,7 @@ class CommandProductService (
   val createInventoryPort: CreateInventoryPort,
   val mapper: ProductMapper
 ): ProductCreateUseCase, ProductModifyUseCase, ProductDeleteUseCase {
-  override fun create(userId: Long, productCreateRequest: ProductCreateRequest): Product {
+  override fun create(userId: Long, productCreateRequest: ProductCreateRequest): CommonResponse<Product> {
     val inventoryEntity = createInventoryPort.create(InventoryEntity(
       quantity = productCreateRequest.quantity,
     ))
@@ -28,7 +29,8 @@ class CommandProductService (
     productEntity.userId = userId
     
     productEntity.inventory = inventoryEntity
-    return mapper.toData(createProductPort.create(productEntity))
+    val response = mapper.toData(createProductPort.create(productEntity))
+    return CommonResponse.success(response)
   }
 
   override fun modify(productModifyRequest: ProductModifyRequest): Product {

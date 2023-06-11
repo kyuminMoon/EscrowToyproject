@@ -92,9 +92,8 @@ object Dependencies {
     )
 
     val TEST = listOf(
-        "com.navercorp.fixturemonkey:fixture-monkey-starter",
-        "com.navercorp.fixturemonkey:fixture-monkey-kotlin",
-        "com.navercorp.fixturemonkey:fixture-monkey-jackson",
+        "com.navercorp.fixturemonkey:fixture-monkey-kotlin:0.5.7",
+        "com.navercorp.fixturemonkey:fixture-monkey-jackson:0.5.7",
         "org.jetbrains.kotlin:kotlin-test",
         "io.mockk:mockk:1.12.3",
         "org.springframework.boot:spring-boot-starter-test",

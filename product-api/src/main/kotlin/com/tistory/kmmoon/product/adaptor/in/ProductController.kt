@@ -1,5 +1,6 @@
 package com.tistory.kmmoon.product.adaptor.`in`
 
+import com.tistory.kmmoon.core.exception.CommonResponse
 import com.tistory.kmmoon.core.security.UserSecurity
 import com.tistory.kmmoon.product.application.port.`in`.ProductCreateUseCase
 import com.tistory.kmmoon.product.application.port.`in`.ProductDeleteUseCase
@@ -36,7 +37,7 @@ class ProductController(
   }
 
   @PostMapping
-  fun create(@AuthenticationPrincipal userSecurity: UserSecurity, @RequestBody productCreateRequest: ProductCreateRequest): ResponseEntity<Product> {
+  fun create(@AuthenticationPrincipal userSecurity: UserSecurity, @RequestBody productCreateRequest: ProductCreateRequest): ResponseEntity<CommonResponse<Product>> {
     return ResponseEntity
       .ok()
       .body(productCreateUseCase.create(userSecurity.getId(), productCreateRequest))
