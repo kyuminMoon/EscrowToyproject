@@ -1,5 +1,5 @@
 package com.tistory.kmmoon.product.application.port.`in`
 
 interface ProductDeleteUseCase {
-    fun delete(productId: Long, id: Long)
+    fun delete(userId: Long, productId: Long)
 }

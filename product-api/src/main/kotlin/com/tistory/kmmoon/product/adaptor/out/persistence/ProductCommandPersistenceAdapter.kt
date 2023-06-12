@@ -20,8 +20,8 @@ class ProductCommandPersistenceAdapter(
     return productRepository.save(entity)
   }
 
-  override fun delete(productId: Long) {
-    productRepository.deleteById(productId)
+  override fun delete(entity: ProductEntity) {
+    productRepository.delete(entity)
   }
 
 }

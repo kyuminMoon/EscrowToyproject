@@ -7,6 +7,7 @@ import com.tistory.kmmoon.common.DatabaseCleanupBefore
 import com.tistory.kmmoon.common.UserRole
 import com.tistory.kmmoon.core.security.UserSecurity
 import com.tistory.kmmoon.product.domain.request.ProductCreateRequest
+import com.tistory.kmmoon.product.domain.request.ProductModifyRequest
 import net.jqwik.api.Arbitraries
 import org.assertj.core.api.BDDAssertions.then
 import org.hamcrest.Matchers
@@ -43,6 +44,9 @@ class ProductControllerTest(
     val mvc: MockMvc,
     @Autowired
     val objectMapper: ObjectMapper,
+    val sut: FixtureMonkey = FixtureMonkey.builder()
+        .plugin(KotlinPlugin())
+        .build()
 ) : DatabaseCleanupBefore() {
     @BeforeEach
     override fun setUp() {
@@ -64,21 +68,12 @@ class ProductControllerTest(
     @Test
     @DisplayName("상품 생성")
     fun create() {
-
-        val sut: FixtureMonkey = FixtureMonkey.builder()
-            .plugin(KotlinPlugin())
-            .build()
-
         val actual: ProductCreateRequest = sut.giveMeBuilder(ProductCreateRequest::class.java)
             .set("name", Arbitraries.strings().ofMinLength(2).ofMaxLength(50).ascii())
             .set("description", Arbitraries.strings().ofMinLength(2).ofMaxLength(1000).ascii())
             .set("price", Arbitraries.integers().between(100, 100_000_000))
             .set("quantity", Arbitraries.integers().between(1, 10_000))
             .sample()
-        then(actual.name.length).isBetween(2, 50)
-        then(actual.description.length).isBetween(2,1000)
-        then(actual.quantity).isBetween(1, 10_000) // @Min(1) @Max(100)
-        then(actual.price).isBetween(100, 100_000_000) // @Min(0)
 
         val content: String = objectMapper.writeValueAsString(actual)
 
@@ -103,6 +98,27 @@ class ProductControllerTest(
     @Test
     @DisplayName("상품 정보 및 재고 수정")
     fun modify() {
+        val actual: ProductModifyRequest = sut.giveMeBuilder(ProductModifyRequest::class.java)
+            .set("name", Arbitraries.strings().ofMinLength(2).ofMaxLength(50).ascii())
+            .set("description", Arbitraries.strings().ofMinLength(2).ofMaxLength(1000).ascii())
+            .set("price", Arbitraries.integers().between(100, 100_000_000))
+            .set("quantity", Arbitraries.integers().between(1, 10_000))
+            .sample()
+
+        val content: String = objectMapper.writeValueAsString(actual)
+
+        mvc.perform(
+            put("/user/products/{productId}", 1).with(csrf())
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(content)
+        ).andDo(print())
+            .andExpectAll(
+                status().isOk(),
+                header().string(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE),
+                jsonPath("success").value(Matchers.`is`(true)),
+                jsonPath("data").exists()
+            )
     }
 
     /**
@@ -111,5 +127,15 @@ class ProductControllerTest(
     @Test
     @DisplayName("상품 삭제")
     fun delete() {
+        mvc.perform(
+            delete("/user/products/{productId}", 1).with(csrf())
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+        ).andDo(print())
+            .andExpectAll(
+                status().isOk(),
+                header().string(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE),
+                jsonPath("success").value(Matchers.`is`(true)),
+            )
     }
 }

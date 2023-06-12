@@ -5,5 +5,5 @@ import com.tistory.kmmoon.product.domain.Product
 import com.tistory.kmmoon.product.domain.request.ProductCreateRequest
 
 interface ProductCreateUseCase {
-  fun create(request: Long, productCreateRequest: ProductCreateRequest): CommonResponse<Product>
+  fun create(userId: Long, productCreateRequest: ProductCreateRequest): CommonResponse<Product>
 }
