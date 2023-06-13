@@ -1,7 +1,7 @@
 package com.tistory.kmmoon.payment.adaptor.`in`
 
 import com.tistory.kmmoon.payment.PaymentEntity
-import com.tistory.kmmoon.payment.application.PaymentCreateService
+import com.tistory.kmmoon.payment.application.PaymentQueryService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/payments")
 class PaymentController (
-  val paymentService: PaymentCreateService
+  val paymentService: PaymentQueryService
 ) {
 
   @GetMapping("/all", produces = ["application/json"])
