@@ -1,3 +1,7 @@
 package com.tistory.kmmoon.payment.application.port.out
 
-interface DeletePaymentPort
+import com.tistory.kmmoon.payment.PaymentEntity
+
+interface DeletePaymentPort {
+    fun delete(entity: PaymentEntity): PaymentEntity
+}

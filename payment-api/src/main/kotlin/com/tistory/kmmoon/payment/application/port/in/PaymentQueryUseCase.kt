@@ -1,3 +1,8 @@
 package com.tistory.kmmoon.payment.application.port.`in`
 
-interface PaymentQueryUseCase
+import com.tistory.kmmoon.payment.PaymentEntity
+import org.springframework.data.domain.Pageable
+
+interface PaymentQueryUseCase {
+    fun findAll(pageable: Pageable): List<PaymentEntity>?
+}

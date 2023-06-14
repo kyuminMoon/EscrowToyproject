@@ -1,3 +1,7 @@
 package com.tistory.kmmoon.payment.application.port.out
 
-interface ModifyPaymentPort
+import com.tistory.kmmoon.payment.PaymentEntity
+
+interface ModifyPaymentPort {
+    fun modify(entity: PaymentEntity): PaymentEntity
+}
