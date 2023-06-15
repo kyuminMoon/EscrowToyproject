@@ -10,7 +10,7 @@ data class PaymentEntity(
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false)
-  val paymentId: Long,
+  val id: Long,
   val amount: BigDecimal,
   val paymentMethod: String,
   val paymentStatus: String,

@@ -1,11 +1,15 @@
 package com.tistory.kmmoon.payment.application
 
+import com.tistory.kmmoon.core.security.UserSecurity
 import com.tistory.kmmoon.payment.application.port.`in`.PaymentCreateUseCase
 import com.tistory.kmmoon.payment.application.port.`in`.PaymentDeleteUseCase
 import com.tistory.kmmoon.payment.application.port.`in`.PaymentModifyUseCase
 import com.tistory.kmmoon.payment.application.port.out.CreatePaymentPort
 import com.tistory.kmmoon.payment.application.port.out.DeletePaymentPort
 import com.tistory.kmmoon.payment.application.port.out.ModifyPaymentPort
+import com.tistory.kmmoon.payment.domain.iamport.request.Payment
+import com.tistory.kmmoon.payment.domain.iamport.request.PaymentCreateRequest
+import com.tistory.kmmoon.payment.domain.iamport.request.PaymentModifyRequest
 import org.springframework.stereotype.Service
 
 @Service
@@ -14,5 +18,15 @@ class PaymentCommandService (
   val modifyPaymentPort: ModifyPaymentPort,
   val deletePaymentPort: DeletePaymentPort
 ) : PaymentCreateUseCase, PaymentModifyUseCase, PaymentDeleteUseCase {
+  override fun create(paymentCreateRequest: PaymentCreateRequest, userSecurity: UserSecurity): Payment? {
+    TODO("Not yet implemented")
+  }
 
+  override fun delete(paymentId: Long, userSecurity: UserSecurity): Payment? {
+    TODO("Not yet implemented")
+  }
+
+  override fun modify(paymentModifyRequest: PaymentModifyRequest, userSecurity: UserSecurity): Payment? {
+    TODO("Not yet implemented")
+  }
 }

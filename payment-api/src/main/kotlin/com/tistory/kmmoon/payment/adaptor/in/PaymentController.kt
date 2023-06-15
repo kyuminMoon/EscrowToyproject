@@ -1,22 +1,17 @@
 package com.tistory.kmmoon.payment.adaptor.`in`
 
 import com.tistory.kmmoon.core.security.UserSecurity
-import com.tistory.kmmoon.payment.PaymentEntity
-import com.tistory.kmmoon.payment.application.PaymentQueryService
 import com.tistory.kmmoon.payment.application.port.`in`.PaymentCreateUseCase
 import com.tistory.kmmoon.payment.application.port.`in`.PaymentDeleteUseCase
 import com.tistory.kmmoon.payment.application.port.`in`.PaymentModifyUseCase
 import com.tistory.kmmoon.payment.application.port.`in`.PaymentQueryUseCase
+import com.tistory.kmmoon.payment.domain.iamport.request.Payment
+import com.tistory.kmmoon.payment.domain.iamport.request.PaymentCreateRequest
+import com.tistory.kmmoon.payment.domain.iamport.request.PaymentModifyRequest
 import org.springframework.data.domain.Pageable
 import org.springframework.http.ResponseEntity
 import org.springframework.security.core.annotation.AuthenticationPrincipal
-import org.springframework.web.bind.annotation.DeleteMapping
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.PutMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/payments")
