@@ -1,4 +1,6 @@
-package com.tistory.kmmoon.payment.domain.iamport
+package com.tistory.kmmoon.payment.domain.iamport.response
+
+import com.tistory.kmmoon.payment.domain.payment.iamport.PgProvider
 
 data class IamportResponse(
     val applyNum: String,

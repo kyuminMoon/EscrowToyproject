@@ -1,4 +1,4 @@
-package com.tistory.kmmoon.payment.domain.iamport
+package com.tistory.kmmoon.payment.domain.payment.iamport
 
 enum class PgProvider (val value: String) {
     HTML_5_INICIS("이니시스웹표준"),
