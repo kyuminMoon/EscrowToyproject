@@ -12,13 +12,10 @@ import org.mapstruct.ReportingPolicy
 interface PaymentMapper {
 
   @Mapping(target = "id", ignore = true)
-  @Mapping(target = "active", expression = "java(true)")
   fun createEntity(request: PaymentCreateRequest): PaymentEntity
 
   fun modifyEntity(request: PaymentModifyRequest): PaymentEntity
 
-  @Mapping(target = "productId", source = "id")
-  @Mapping(target = "quantity", source = "inventory.quantity")
   fun toData(entity: PaymentEntity?): Payment
 
   fun toData(findAllBy: List<PaymentEntity>?): List<Payment>?
