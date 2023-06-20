@@ -10,7 +10,7 @@ import com.tistory.kmmoon.payment.application.port.out.ModifyPaymentPort
 import com.tistory.kmmoon.payment.domain.iamport.request.Payment
 import com.tistory.kmmoon.payment.domain.iamport.request.PaymentCreateRequest
 import com.tistory.kmmoon.payment.domain.iamport.request.PaymentModifyRequest
-import com.tistory.kmmoon.product.domain.mapper.PaymentMapper
+import com.tistory.kmmoon.payment.domain.payment.mapper.PaymentMapper
 import org.springframework.stereotype.Service
 
 @Service

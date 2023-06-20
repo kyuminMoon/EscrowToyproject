@@ -1,4 +1,4 @@
-package com.tistory.kmmoon.product.domain.mapper
+package com.tistory.kmmoon.payment.domain.payment.mapper
 
 import com.tistory.kmmoon.payment.PaymentEntity
 import com.tistory.kmmoon.payment.domain.iamport.request.Payment
