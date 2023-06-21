@@ -1,7 +1,5 @@
 package com.tistory.kmmoon.payment.application
 
-import com.tistory.kmmoon.payment.PaymentEntity
-import com.tistory.kmmoon.payment.application.port.`in`.PaymentCreateUseCase
 import com.tistory.kmmoon.payment.application.port.`in`.PaymentQueryUseCase
 import com.tistory.kmmoon.payment.application.port.out.QueryPaymentPort
 import com.tistory.kmmoon.payment.domain.iamport.request.Payment
@@ -17,6 +15,10 @@ class PaymentQueryService (
 
   override fun findAll(pageable: Pageable): List<Payment>? {
     return mapper.toData(queryPaymentPort.findAll());
+  }
+
+  override fun findById(id: Long): Payment? {
+    return mapper.toData(queryPaymentPort.findById(id));
   }
 
 }

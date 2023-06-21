@@ -37,7 +37,7 @@ class PaymentController (
   }
 
   @PutMapping(name = "/{paymentId}", produces = ["application/json"])
-  fun create(@PathVariable paymentId: Long, @AuthenticationPrincipal userSecurity: UserSecurity, paymentModifyRequest: PaymentModifyRequest): ResponseEntity<Payment> {
+  fun modify(@PathVariable paymentId: Long, @AuthenticationPrincipal userSecurity: UserSecurity, paymentModifyRequest: PaymentModifyRequest): ResponseEntity<Payment> {
     paymentModifyRequest.id = paymentId
     return ResponseEntity
       .ok()
@@ -45,9 +45,7 @@ class PaymentController (
   }
 
   @DeleteMapping(name = "/{paymentId}", produces = ["application/json"])
-  fun create(@PathVariable paymentId: Long, @AuthenticationPrincipal userSecurity: UserSecurity): ResponseEntity<Payment> {
-    return ResponseEntity
-      .ok()
-      .body(paymentDeleteUseCase.delete(paymentId, userSecurity))
+  fun delete(@PathVariable paymentId: Long, @AuthenticationPrincipal userSecurity: UserSecurity) {
+    paymentDeleteUseCase.delete(paymentId, userSecurity)
   }
 }

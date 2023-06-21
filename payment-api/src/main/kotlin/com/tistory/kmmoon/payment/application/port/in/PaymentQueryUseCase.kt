@@ -6,4 +6,5 @@ import org.springframework.data.domain.Pageable
 
 interface PaymentQueryUseCase {
     fun findAll(pageable: Pageable): List<Payment>?
+    fun findById(id: Long): Payment?
 }

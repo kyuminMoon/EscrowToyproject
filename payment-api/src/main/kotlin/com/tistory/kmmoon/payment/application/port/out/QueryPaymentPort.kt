@@ -4,4 +4,5 @@ import com.tistory.kmmoon.payment.PaymentEntity
 
 interface QueryPaymentPort {
     fun findAll(): List<PaymentEntity>
+    fun findById(id: Long): PaymentEntity
 }

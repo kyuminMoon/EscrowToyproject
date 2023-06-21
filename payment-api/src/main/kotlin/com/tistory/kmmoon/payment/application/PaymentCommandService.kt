@@ -7,6 +7,7 @@ import com.tistory.kmmoon.payment.application.port.`in`.PaymentModifyUseCase
 import com.tistory.kmmoon.payment.application.port.out.CreatePaymentPort
 import com.tistory.kmmoon.payment.application.port.out.DeletePaymentPort
 import com.tistory.kmmoon.payment.application.port.out.ModifyPaymentPort
+import com.tistory.kmmoon.payment.application.port.out.QueryPaymentPort
 import com.tistory.kmmoon.payment.domain.iamport.request.Payment
 import com.tistory.kmmoon.payment.domain.iamport.request.PaymentCreateRequest
 import com.tistory.kmmoon.payment.domain.iamport.request.PaymentModifyRequest
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service
 
 @Service
 class PaymentCommandService (
+  val queryPaymentPort: QueryPaymentPort,
   val createPaymentPort: CreatePaymentPort,
   val modifyPaymentPort: ModifyPaymentPort,
   val deletePaymentPort: DeletePaymentPort,
@@ -22,16 +24,16 @@ class PaymentCommandService (
 ) : PaymentCreateUseCase, PaymentModifyUseCase, PaymentDeleteUseCase {
   override fun create(paymentCreateRequest: PaymentCreateRequest, userSecurity: UserSecurity): Payment? {
     val entity = mapper.createEntity(paymentCreateRequest)
-
-    createPaymentPort.create(entity)
-    return null
+    return mapper.toData(createPaymentPort.create(entity))
   }
 
-  override fun delete(paymentId: Long, userSecurity: UserSecurity): Payment? {
-    TODO("Not yet implemented")
+  override fun delete(paymentId: Long, userSecurity: UserSecurity) {
+    val entity = queryPaymentPort.findById(paymentId)
+    deletePaymentPort.delete(entity)
   }
 
   override fun modify(paymentModifyRequest: PaymentModifyRequest, userSecurity: UserSecurity): Payment? {
-    TODO("Not yet implemented")
+    val entity = queryPaymentPort.findById(paymentModifyRequest.id)
+    return mapper.toData(modifyPaymentPort.modify(entity))
   }
 }
