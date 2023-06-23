@@ -18,10 +18,11 @@ import org.springframework.stereotype.Service
 class PaymentCommandService (
   val queryPaymentPort: QueryPaymentPort,
   val createPaymentPort: CreatePaymentPort,
-  val modifyPaymentPort: ModifyPaymentPort,
+//  val modifyPaymentPort: ModifyPaymentPort,
   val deletePaymentPort: DeletePaymentPort,
   val mapper: PaymentMapper
-) : PaymentCreateUseCase, PaymentModifyUseCase, PaymentDeleteUseCase {
+) : PaymentCreateUseCase, /*PaymentModifyUseCase,*/ PaymentDeleteUseCase {
+  /* TODO 결제 완료 시, WebSocket/SSE 등을 사용하여 사용자에게 리턴해줘야 하지만 해당 부분은 이후 작업 */
   override fun create(paymentCreateRequest: PaymentCreateRequest, userSecurity: UserSecurity): Payment? {
     // TODO 상품의 재고를 수정해줘야함
     // TODO 아임포트 결제모듈 연동 필요
@@ -36,10 +37,8 @@ class PaymentCommandService (
     deletePaymentPort.delete(entity)
   }
 
-  override fun modify(paymentModifyRequest: PaymentModifyRequest, userSecurity: UserSecurity): Payment? {
-    // TODO 상품의 재고를 수정해줘야함
-    // TODO 아임포트 결제모듈 연동 필요
-    val entity = queryPaymentPort.findById(paymentModifyRequest.id)
-    return mapper.toData(modifyPaymentPort.modify(entity))
-  }
+//  override fun modify(paymentModifyRequest: PaymentModifyRequest, userSecurity: UserSecurity): Payment? {
+//    val entity = queryPaymentPort.findById(paymentModifyRequest.id)
+//    return mapper.toData(modifyPaymentPort.modify(entity))
+//  }
 }
