@@ -13,4 +13,8 @@ class PaymentQueryPersistenceAdapter(
         TODO("Not yet implemented")
     }
 
+    override fun findById(id: Long): PaymentEntity {
+        TODO("Not yet implemented")
+    }
+
 }

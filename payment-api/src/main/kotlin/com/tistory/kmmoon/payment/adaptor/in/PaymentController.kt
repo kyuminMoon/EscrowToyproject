@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*
 class PaymentController (
   val paymentQueryUseCase: PaymentQueryUseCase,
   val paymentCreateUseCase: PaymentCreateUseCase,
-  val paymentModifyUseCase: PaymentModifyUseCase,
+//  val paymentModifyUseCase: PaymentModifyUseCase,
   val paymentDeleteUseCase: PaymentDeleteUseCase
 ) {
 
@@ -36,13 +36,13 @@ class PaymentController (
       .body(paymentCreateUseCase.create(paymentCreateRequest, userSecurity))
   }
 
-  @PutMapping(name = "/{paymentId}", produces = ["application/json"])
-  fun modify(@PathVariable paymentId: Long, @AuthenticationPrincipal userSecurity: UserSecurity, paymentModifyRequest: PaymentModifyRequest): ResponseEntity<Payment> {
-    paymentModifyRequest.id = paymentId
-    return ResponseEntity
-      .ok()
-      .body(paymentModifyUseCase.modify(paymentModifyRequest, userSecurity))
-  }
+//  @PutMapping(name = "/{paymentId}", produces = ["application/json"])
+//  fun modify(@PathVariable paymentId: Long, @AuthenticationPrincipal userSecurity: UserSecurity, paymentModifyRequest: PaymentModifyRequest): ResponseEntity<Payment> {
+//    paymentModifyRequest.id = paymentId
+//    return ResponseEntity
+//      .ok()
+//      .body(paymentModifyUseCase.modify(paymentModifyRequest, userSecurity))
+//  }
 
   @DeleteMapping(name = "/{paymentId}", produces = ["application/json"])
   fun delete(@PathVariable paymentId: Long, @AuthenticationPrincipal userSecurity: UserSecurity) {
