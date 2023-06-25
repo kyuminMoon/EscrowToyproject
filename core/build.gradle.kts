@@ -8,6 +8,8 @@ jar.enabled = true
 
 dependencies {
   implementation(project(":customer-rds-entity"))
+  implementation(Dependencies.KAFKA)
+  implementation(Dependencies.KAFKA_STREAM)
   implementation(Dependencies.CORE)
   implementation(Dependencies.JPA)
   implementation(Dependencies.JPA_KAPT)
