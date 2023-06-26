@@ -1,4 +1,4 @@
-package com.tistory.kmmoon.payment.adaptor.`in`
+package com.tistory.kmmoon.payment.adaptor.`in`.web
 
 import com.tistory.kmmoon.core.security.UserSecurity
 import com.tistory.kmmoon.payment.application.port.`in`.PaymentCreateUseCase

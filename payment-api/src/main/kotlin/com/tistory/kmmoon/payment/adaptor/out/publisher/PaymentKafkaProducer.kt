@@ -22,6 +22,6 @@ class PaymentKafkaProducer(kafkaTemplate: KafkaTemplate<String, ProductInventory
     }
 
     companion object {
-        private const val TOPIC = "delivery"
+        private const val TOPIC = "product-inventory-deduction"
     }
 }
