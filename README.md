@@ -187,6 +187,12 @@
 - orders (1:N) order_items
 - orders (1:1) payments
 
+
+## Event stream 관련 정리
+- 주문 > 상품 재고 변경 > 결제 > 배송(SKIP) > 에스크로 성공
+- 주문 취소 > 결제 취소 > 상품 재고 변경
+
+
 # 포트원(아임포트) 개발자센터 주소
 
 https://developers.portone.io/docs/ko/readme
@@ -264,3 +270,5 @@ https://developers.portone.io/docs/ko/auth/guide-2/readme
   장바구니사용자라면 구매한 장바구니 객체 삭제
 * [ ]  배송완료 이벤트 발행
 * [ ]  에스크로 배송 완료 후 n일 || 주문 확정 / 주문 교환,취소 ? 입금 : return
+
+
