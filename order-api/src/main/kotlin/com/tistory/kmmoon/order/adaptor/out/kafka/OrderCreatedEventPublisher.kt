@@ -1,4 +1,4 @@
-package com.tistory.kmmoon.order.adaptor.event.publisher
+package com.tistory.kmmoon.order.adaptor.out.kafka
 
 import com.tistory.kmmoon.core.event.OrderCreatedEvent
 import org.springframework.kafka.core.KafkaTemplate
@@ -10,6 +10,6 @@ class OrderCreatedEventPublisher(private val kafkaTemplate: KafkaTemplate<String
     // 주문 -> 결제 -> 상품 재고 변경
     //
     fun publish(orderCreatedEvent: OrderCreatedEvent) {
-        kafkaTemplate.send("order_created_topic", orderCreatedEvent)
+        kafkaTemplate.send("order_create", orderCreatedEvent)
     }
 }

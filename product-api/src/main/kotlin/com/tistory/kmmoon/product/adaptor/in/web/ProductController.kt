@@ -1,4 +1,4 @@
-package com.tistory.kmmoon.product.adaptor.`in`
+package com.tistory.kmmoon.product.adaptor.`in`.web
 
 import com.tistory.kmmoon.core.exception.CommonResponse
 import com.tistory.kmmoon.core.security.UserSecurity

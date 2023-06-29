@@ -1,4 +1,4 @@
-package com.tistory.kmmoon.payment.adaptor.out.publisher
+package com.tistory.kmmoon.payment.adaptor.out.kafka
 
 import com.tistory.kmmoon.core.event.ProductInventoryDeductionEvent
 import org.springframework.kafka.core.KafkaTemplate
@@ -22,6 +22,6 @@ class PaymentKafkaProducer(kafkaTemplate: KafkaTemplate<String, ProductInventory
     }
 
     companion object {
-        private const val TOPIC = "product-inventory-deduction"
+        private const val TOPIC = "product-stock-change"
     }
 }
