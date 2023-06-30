@@ -189,7 +189,7 @@
 
 
 ## Event stream 관련 정리
-- 주문 생성(order-create) > 상품 재고 변경(product-stock-change) > 결제(payment) > 배송(SKIP) > 에스크로 주문 확정(escrow-order-confirmation)
+- 결제(payment : {paymentId, productId, userId, createdAt}) > 주문 생성(order-create : {paymentId, productId, orderId, userId, createdAt}) > 상품 재고 변경(product-stock-change : {에스크로 관련 정보}) > 배송(SKIP) > 에스크로 주문 확정(escrow-order-confirmation)
 - 주문 취소(order-cancel) > 결제 취소(payment-cancel) > 상품 재고 변경(product-stock-change)
 
 
