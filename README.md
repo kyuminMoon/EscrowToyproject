@@ -189,8 +189,8 @@
 
 
 ## Event stream 관련 정리
-- 결제(payment : {paymentId, productId, userId, createdAt}) > 주문 생성(order-create : {paymentId, productId, orderId, userId, createdAt}) > 상품 재고 변경(product-stock-change : {에스크로 관련 정보}) > 배송(SKIP) > 에스크로 주문 확정(escrow-order-confirmation)
-- 주문 취소(order-cancel) > 결제 취소(payment-cancel) > 상품 재고 변경(product-stock-change)
+- 주문 생성(on-order-create_order-create : {productId, orderId, userId, createdAt}) > 결제(on-order-create_payment-create : {paymentId, orderId, productId, userId, createdAt}) > 주문 생성(on-order-create_order-create : {paymentId, productId, orderId, userId, createdAt}) > 상품 재고 변경(on-order-create_product-stock-change : {에스크로 관련 정보}) > 배송(SKIP) > 에스크로 주문 확정(on-order-create_escrow-order-confirmation) > 주문 확정(on-order-create_order-confirm 주문 확정 : {paymentId, productId, orderId, userId, createdAt})
+- 주문 취소(on-order-cancel_order-cancel) > 결제 취소(on-order-cancel_payment-cancel) > 상품 재고 변경(on-order-cancel_product-stock-change) > 주문 확정(on-order-cancel_order-confirm 주문 취소 확정 : {paymentId, productId, orderId, userId, createdAt})
 
 
 # 포트원(아임포트) 개발자센터 주소
