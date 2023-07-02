@@ -9,7 +9,11 @@ class OrderCreatedEventPublisher(private val kafkaTemplate: KafkaTemplate<String
 
     // 주문 -> 결제 -> 상품 재고 변경
     //
-    fun publish(orderCreatedEvent: OrderCreatedEvent) {
-        kafkaTemplate.send("order_create", orderCreatedEvent)
+    fun publish(orderCreatedEvent: OrderCreatedEvent.OrderCreate) {
+        kafkaTemplate.send("on-order-create_order-create", orderCreatedEvent)
+    }
+
+    fun publish(orderCreatedEvent: OrderCreatedEvent.OrderConfirm) {
+        kafkaTemplate.send("on-order-create_order-confirm", orderCreatedEvent)
     }
 }

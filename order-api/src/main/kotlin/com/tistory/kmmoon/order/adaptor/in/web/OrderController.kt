@@ -1,4 +1,4 @@
-package com.tistory.kmmoon.order.adaptor.`in`
+package com.tistory.kmmoon.order.adaptor.`in`.web
 
 import com.tistory.kmmoon.order.OrderEntity
 import com.tistory.kmmoon.order.application.OrderCreateService
