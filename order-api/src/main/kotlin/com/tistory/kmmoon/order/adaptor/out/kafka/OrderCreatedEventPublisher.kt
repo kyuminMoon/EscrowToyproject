@@ -11,13 +11,9 @@ import org.springframework.stereotype.Component
 // (x)> 배송(SKIP)
 // (o)> 에스크로 주문 확정(on-order-create_escrow-order-confirmation)
 // (x)> 주문 확정(on-order-create_order-confirm : {paymentId, productId, orderId, userId, createdAt})
-class OrderCreatedEventPublisher(private val kafkaTemplate: KafkaTemplate<String, OrderCreatedEvent>) {
+class OrderCreatedEventPublisher(private val kafkaTemplate: KafkaTemplate<String, OrderCreatedEvent.OrderCreate>) {
 
     fun orderCreateEvent(event: OrderCreatedEvent.OrderCreate) {
         kafkaTemplate.send("on-order-create_payment-create", event)
     }
-//
-//    fun orderConfirmEvent(event: OrderCreatedEvent.OrderConfirm) {
-//        kafkaTemplate.send("on-order-create_order-confirm", event)
-//    }
 }
