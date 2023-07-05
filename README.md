@@ -272,3 +272,10 @@ https://developers.portone.io/docs/ko/auth/guide-2/readme
 * [ ]  에스크로 배송 완료 후 n일 || 주문 확정 / 주문 교환,취소 ? 입금 : return
 
 
+## 참고 링크
+
+### Kafka stream 관련
+기초 개념 > https://erjuer.tistory.com/91
+https://velog.io/@zenon8485/Spring-Cloud-Stream-%EC%A0%95%EB%A6%AC
+https://www.devkuma.com/docs/apache-kafka/strems/
+
