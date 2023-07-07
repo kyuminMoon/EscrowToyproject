@@ -14,4 +14,11 @@ abstract class OrderCreatedEvent {
         val price: Double
     )
 
+    data class OrderConfirm(
+        val orderId: String,
+        val customerId: String,
+        val totalPrice: Double,
+        val items: List<OrderItemInfo>
+    )
+
 }

@@ -1,5 +1,6 @@
 package com.tistory.kmmoon.streams
 
+import com.tistory.kmmoon.core.event.OrderCreatedEvent
 import org.slf4j.LoggerFactory
 import org.springframework.cloud.stream.annotation.EnableBinding
 import org.springframework.cloud.stream.annotation.Input
@@ -11,6 +12,7 @@ import org.springframework.messaging.MessageChannel
 import org.springframework.messaging.SubscribableChannel
 import org.springframework.stereotype.Service
 import java.util.function.Consumer
+import java.util.function.Supplier
 
 //interface OrderStreams {
 //    @Input(INPUT)
@@ -46,12 +48,21 @@ class OrderStreams {
     private val log = LoggerFactory.getLogger(OrderStreams::class.java)
 
     @Bean
-    fun gradesChannel(): Consumer<Grade> {
+    fun gradesChannel(): Consumer<OrderCreatedEvent.OrderConfirm> {
         return Consumer { listen(grade = it) }
     }
 
-    fun listen(grade: Grade) {
+    fun listen(grade: OrderCreatedEvent.OrderConfirm) {
         log.info("Received $grade")
         // do something
     }
+
+    @Service
+    class StudentsQueueWriter {
+        @Bean
+        fun studentsChannel(): Supplier<OrderCreatedEvent.OrderCreate> {
+            return Supplier { OrderCreatedEvent.OrderCreate("Adam") }
+        }
+    }
+
 }
