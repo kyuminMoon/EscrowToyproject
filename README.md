@@ -278,4 +278,7 @@ https://developers.portone.io/docs/ko/auth/guide-2/readme
 기초 개념 > https://erjuer.tistory.com/91
 https://velog.io/@zenon8485/Spring-Cloud-Stream-%EC%A0%95%EB%A6%AC
 https://www.devkuma.com/docs/apache-kafka/strems/
+https://www.techblogss.com/springboot/spring-boot-kafka-streams-example
+https://www.youtube.com/watch?v=u8QMyXlq8Po
 
+![](.README_images/dfc17bd1.png)
