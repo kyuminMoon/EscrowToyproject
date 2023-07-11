@@ -280,5 +280,8 @@ https://velog.io/@zenon8485/Spring-Cloud-Stream-%EC%A0%95%EB%A6%AC
 https://www.devkuma.com/docs/apache-kafka/strems/
 https://www.techblogss.com/springboot/spring-boot-kafka-streams-example
 https://www.youtube.com/watch?v=u8QMyXlq8Po
-뭔지 몰라도 취소선 있는데 사용중... 공부 좀더 해보는걸로
+뭔지 몰라도 취소선 있는데 사용중... 공부 좀더 해보는걸
 ![](.README_images/dfc17bd1.png)
+
+
+- 야근시렁...
